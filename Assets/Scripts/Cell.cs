@@ -7,9 +7,6 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
     #region Publics
-
-    public Item _item;
-    
     public List<Cell> neighbours { get; private set; }
     public List<Cell> allArea { get; private set; }
     
@@ -26,8 +23,8 @@ public class Cell : MonoBehaviour
     #endregion
 
     #region Privates
-
     
+    private Item _item;
 
     #endregion
 
@@ -53,13 +50,13 @@ public class Cell : MonoBehaviour
         }
     }
 
-    public void PrepareCell(int _x, int _y, GameGrid _gameGrid)
+    public void Prepare(int _x, int _y, GameGrid _gameGrid)
     {
        gameGrid = _gameGrid;
        x = _x;
        y = _y;
        transform.localPosition = new Vector3(x, y);
-       isFillingCell = (y == gameGrid.Rows-1);
+       isFillingCell = (y == gameGrid.rows-1);
 
        UpdateName(); 
        UpdateNeighbours(); //This method is responsible for updating neighbours in up, down, left, right and assigns firstCellBelow
@@ -109,7 +106,7 @@ public class Cell : MonoBehaviour
             case Direction.Down:              y -= 1; break;
         }
 
-        if (dumpX >= gameGrid.Columns || dumpY >= gameGrid.Rows || dumpX < 0 || dumpY < 0) return null;
+        if (dumpX >= gameGrid.colums || dumpY >= gameGrid.rows || dumpX < 0 || dumpY < 0) return null;
         
         return gameGrid.Cells[dumpX, dumpY];
         
@@ -137,9 +134,6 @@ public class Cell : MonoBehaviour
         //MatchingManager.Instance.ExplodeMatchingCells(this);
 
     }
-    
-    
-
     private void UpdateName()
     {
         var cellName = x + " " + y;

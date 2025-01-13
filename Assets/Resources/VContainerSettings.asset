@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5839dcad445b91044b043f3c2e4abc01, type: 3}
-  m_Name: Level1
+  m_Script: {fileID: 11500000, guid: 9cf4d8df1d704d5689f3c69bd70d1cb9, type: 3}
+  m_Name: VContainerSettings
   m_EditorClassIdentifier: 
-  levelNumber: 1
-  gridWidth: 10
-  gridHeight: 15
-  moveCount: 20
-  grid: []
+  RootLifetimeScope: {fileID: 0}
+  EnableDiagnostics: 0
+  DisableScriptModifier: 0
+  RemoveClonePostfix: 0

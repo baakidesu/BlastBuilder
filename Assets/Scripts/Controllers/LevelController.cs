@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 public class LevelController : MonoBehaviour
 {
@@ -14,29 +15,20 @@ public class LevelController : MonoBehaviour
 
     #endregion
 
-    #region Publics
-
-    
-
-    #endregion
-
     #region Injections
 
-    [Inject]
-    void Construct(DropFillController _dropFillController, GameGrid _gameGrid)
+    /*[Inject]
+    void Construct(GameGrid _gameGrid)
     {
-        //Debug.Log("LevelManager constructed");
-        dropFillController = _dropFillController;
         gameGrid = _gameGrid;
-    }
-
-
+    }*/
+    
     #endregion
 
 
     private void Start()
     {
-        GetLevelInfo(1);
+        //GetLevelInfo(1);
     }
 
     public LevelInfo GetLevelInfo(int levelIndex)
@@ -53,6 +45,7 @@ public class LevelController : MonoBehaviour
             grid = levelData.grid
         };
 
+        Debug.Log(levelName);
         return levelInfo;
     }
 }
