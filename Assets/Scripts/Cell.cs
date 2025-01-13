@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Cell : MonoBehaviour
@@ -7,6 +9,25 @@ public class Cell : MonoBehaviour
     #region Publics
 
     public Item _item;
+    
+    public List<Cell> neighbours { get; private set; }
+    public List<Cell> allArea { get; private set; }
+    
+    [HideInInspector] public Cell firstCellBelow;
+    [HideInInspector] public bool isFillingCell;
+    
+    [HideInInspector] public int x;
+    [HideInInspector] public int y;
+    
+    public GameGrid gameGrid { get; private set; }
+    
+    public TMP_Text cellText;
+
+    #endregion
+
+    #region Privates
+
+    
 
     #endregion
 
@@ -30,5 +51,99 @@ public class Cell : MonoBehaviour
             if (value != null)
                 value.Cell = this;
         }
+    }
+
+    public void PrepareCell(int _x, int _y, GameGrid _gameGrid)
+    {
+       gameGrid = _gameGrid;
+       x = _x;
+       y = _y;
+       transform.localPosition = new Vector3(x, y);
+       isFillingCell = (y == gameGrid.Rows-1);
+
+       UpdateName(); 
+       UpdateNeighbours(); //This method is responsible for updating neighbours in up, down, left, right and assigns firstCellBelow
+       UpdateAllNeighbours(); //This method is responsible for updating all neighbours
+
+    }
+
+    private void UpdateAllNeighbours()
+    {
+        allArea = GetNeighbours(Direction.Up, Direction.UpRight, Direction.Right, Direction.DownRight, Direction.Down, Direction.DownLeft, Direction.Left, Direction.UpLeft);
+    }
+
+    private void UpdateNeighbours() 
+    {
+        neighbours = GetNeighbours(Direction.Up, Direction.Down, Direction.Left, Direction.Right);
+        firstCellBelow = GetAllNeighbourWithDirection(Direction.Down);
+    }
+
+    private List<Cell> GetNeighbours(params Direction[] directions)
+    {
+        var neighbours = new List<Cell>();
+
+        foreach (var direction in directions)
+        {
+            var neighbour = GetAllNeighbourWithDirection(direction);
+            if (neighbour != null) neighbours.Add(neighbour);
+        }
+        
+        return neighbours;
+    }
+
+    private Cell GetAllNeighbourWithDirection(Direction direction)
+    {
+        var dumpX = x;
+        var dumpY = x;
+
+        switch (direction)
+        {
+            case Direction.None: break;
+            case Direction.Right:     x += 1;         break;
+            case Direction.Left:      x -= 1;         break;
+            case Direction.UpRight:   x += 1; y += 1; break;
+            case Direction.DownRight: x += 1; y -= 1; break;
+            case Direction.UpLeft:    x -= 1; y += 1; break;
+            case Direction.DownLeft:  x -= 1; y -= 1; break;
+            case Direction.Up:                y += 1; break;
+            case Direction.Down:              y -= 1; break;
+        }
+
+        if (dumpX >= gameGrid.Columns || dumpY >= gameGrid.Rows || dumpX < 0 || dumpY < 0) return null;
+        
+        return gameGrid.Cells[dumpX, dumpY];
+        
+    }
+
+    public Cell GetFallTarget()
+    {
+        var targetCell = this;
+        if (targetCell.firstCellBelow != null && targetCell.firstCellBelow.item == null )
+        {
+            targetCell = targetCell.firstCellBelow;
+        }
+
+        return targetCell;
+    }
+
+    public void CellTapped()
+    {
+        if (item == null)
+        {
+            return;
+        }
+        
+        //TODO
+        //MatchingManager.Instance.ExplodeMatchingCells(this);
+
+    }
+    
+    
+
+    private void UpdateName()
+    {
+        var cellName = x + " " + y;
+        cellText.text = cellName;
+        gameObject.name = "Cell: " + cellName;
     }
 }

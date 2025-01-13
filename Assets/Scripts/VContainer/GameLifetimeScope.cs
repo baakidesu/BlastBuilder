@@ -9,5 +9,9 @@ public class GameLifeTimeScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterComponentInHierarchy<GameInjector>().AsSelf();
+        builder.RegisterComponentInHierarchy<LevelController>().AsSelf();
+        builder.RegisterComponentInHierarchy<GameGrid>().AsSelf();
+        
+        builder.Register<DropFillController>(Lifetime.Singleton);
     }
 }
