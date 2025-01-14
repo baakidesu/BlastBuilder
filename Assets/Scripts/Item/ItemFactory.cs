@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ItemFactory : Singleton<ItemFactory>
 {
-    public ItemBase itemBasePrefab;
-    
+    [SerializeField] private ItemBase itemBasePrefab;
     private Dictionary<ItemType, Func<ItemBase, Item>> itemCreators = new Dictionary<ItemType, Func<ItemBase, Item>>
     {
         { ItemType.GreenCube, (itemBase) => CreateNormalItem(itemBase, MatchType.Green) },
@@ -18,17 +17,16 @@ public class ItemFactory : Singleton<ItemFactory>
 
     public Item CreateItem(ItemType itemType, Transform parent)
     {
-        if (itemType == ItemType.None) return null;
-        
+        if(itemType == ItemType.None) return null;
+
         var itemBase = Instantiate(itemBasePrefab, Vector3.zero, Quaternion.identity, parent);
         itemBase.itemType = itemType;
 
         if (!itemCreators.TryGetValue(itemType, out var createItem))
         {
-            Debug.LogError($"Item creator for {itemType} not found");
             return null;
         }
-        
+
         return createItem(itemBase);
     }
 

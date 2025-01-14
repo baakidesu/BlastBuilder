@@ -10,39 +10,43 @@ public class LevelController : MonoBehaviour
     #region Privates
 
     private DropFillController dropFillController;
-    private LevelScriptableObject levelData;
-    private GameGrid gameGrid;
+    private LevelScriptableObject levelDataFromScriptableObject;
+    [SerializeField] private GameGrid gameGrid;
+    
+    private LevelData levelData;
+    private ItemFactory _itemFactory;
 
     #endregion
 
     #region Injections
 
-    /*[Inject]
-    void Construct(GameGrid _gameGrid)
+    [Inject]
+    void Construct(ItemFactory itemFactory)
     {
-        gameGrid = _gameGrid;
-    }*/
+        _itemFactory = itemFactory;
+        //, GameGrid _gameGrid
+        //gameGrid = _gameGrid;
+    }
     
     #endregion
-
-
+    
     private void Start()
     {
-        //GetLevelInfo(1);
+        PrepareLevel();
     }
 
     public LevelInfo GetLevelInfo(int levelIndex)
     {
         string levelName = "Level" + levelIndex.ToString();
-        levelData = Resources.Load<LevelScriptableObject>(levelName);
+        levelDataFromScriptableObject = Resources.Load<LevelScriptableObject>(levelName);
         
         LevelInfo levelInfo = new LevelInfo
         {
-            levelNumber = levelData.levelNumber,
-            gridWidth = levelData.gridWidth,
-            gridHeight = levelData.gridHeight,
-            moveCount = levelData.moveCount,
-            grid = levelData.grid
+            levelNumber = levelDataFromScriptableObject.levelNumber,
+            gridWidth = levelDataFromScriptableObject.gridWidth,
+            gridHeight = levelDataFromScriptableObject.gridHeight,
+            moveCount = levelDataFromScriptableObject.moveCount,
+            grid = levelDataFromScriptableObject.grid
         };
 
         Debug.Log(levelName);
@@ -51,6 +55,21 @@ public class LevelController : MonoBehaviour
 
     private void PrepareLevel()
     {
-        //levelData = newLevelData()
+        levelData = new LevelData(gameGrid.levelInfo);
+
+        for (int i = 0; i < gameGrid.levelInfo.gridHeight; ++i)
+        {
+            for (int j = 0; j < gameGrid.levelInfo.gridWidth; ++j)
+            {
+                var cell = gameGrid.Cells[j,i];
+
+                var itemType = levelData.GridData[gameGrid.levelInfo.gridHeight - i-1, j];
+                var item = ItemFactory.Instance.CreateItem(itemType, gameGrid.itemsParent);
+                if (item == null) continue;
+                
+                cell.item = item;
+                item.transform.position = cell.transform.position;
+            }
+        }
     }
 }

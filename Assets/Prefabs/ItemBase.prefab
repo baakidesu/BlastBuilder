@@ -50,7 +50,7 @@ MonoBehaviour:
   canFall: 1
   canExplode: 0
   health: 1
-  fallAnimation: {fileID: 0}
+  fallAnimation: {fileID: 1514079667678916689}
 --- !u!114 &1514079667678916689
 MonoBehaviour:
   m_ObjectHideFlags: 0

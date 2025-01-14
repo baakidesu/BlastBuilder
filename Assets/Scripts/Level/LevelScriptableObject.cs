@@ -7,6 +7,6 @@ public class LevelScriptableObject : ScriptableObject
     public int gridWidth;
     public int gridHeight;
     public int moveCount;
-    public string grid;
+    public string[] grid;
 
 }

@@ -21,7 +21,6 @@ public class ResizeBorders : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         
-        Debug.Log("ResizeBorders işlemleri");
         float newWidth = gameGrid.levelInfo.gridWidth + widhtPadding;
         float newHeight = gameGrid.levelInfo.gridHeight + heightPadding;
         

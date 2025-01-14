@@ -4,14 +4,6 @@ using VContainer;
 public class NormalCubeItem : Item
 {
     private MatchType _matchType;
-    private ItemImageRepo _imageRepo;
-
-    [Inject]
-    void Construct(ItemImageRepo imageRepo)
-    {
-        _imageRepo = imageRepo;
-    }
-
     public void PrepareNormalCubeItem(ItemBase itemBase, MatchType matchType)
     {
         _matchType = matchType;
@@ -24,17 +16,17 @@ public class NormalCubeItem : Item
         switch (_matchType)
         {
             case MatchType.Green:
-                return _imageRepo.GreenCubeDefault;
+                return ItemImageRepo.Instance.GreenCubeDefault;
             case MatchType.Yellow:
-                return _imageRepo.YellowCubeDefault;
+                return ItemImageRepo.Instance.YellowCubeDefault;
             case MatchType.Blue:
-                return _imageRepo.BlueCubeDefault;
+                return ItemImageRepo.Instance.BlueCubeDefault;
             case MatchType.Red:
-                return _imageRepo.RedCubeDefault;
+                return ItemImageRepo.Instance.RedCubeDefault;
             case MatchType.Pink:
-                return _imageRepo.PinkCubeDefault; 
+                return ItemImageRepo.Instance.PinkCubeDefault; 
             case MatchType.Purple:
-                return _imageRepo.PurpleCubeDefault;
+                return ItemImageRepo.Instance.PurpleCubeDefault;
         }
         return null;
     }
@@ -63,22 +55,22 @@ public class NormalCubeItem : Item
             switch (_matchType)
             {
                 case MatchType.Green:
-                    newSprite = _imageRepo.GreenCubeA;
+                    newSprite = ItemImageRepo.Instance.GreenCubeA;
                     break;
                 case MatchType.Yellow:
-                    newSprite = _imageRepo.YellowCubeA;
+                    newSprite = ItemImageRepo.Instance.YellowCubeA;
                     break;
                 case MatchType.Blue:
-                    newSprite = _imageRepo.BlueCubeA;
+                    newSprite = ItemImageRepo.Instance.BlueCubeA;
                     break;
                 case MatchType.Red:
-                    newSprite = _imageRepo.RedCubeA;
+                    newSprite = ItemImageRepo.Instance.RedCubeA;
                     break;
                 case MatchType.Purple:
-                    newSprite = _imageRepo.PurpleCubeA;
+                    newSprite = ItemImageRepo.Instance.PurpleCubeA;
                     break;
                 case MatchType.Pink:
-                    newSprite = _imageRepo.PinkCubeA;
+                    newSprite = ItemImageRepo.Instance.PinkCubeA;
                     break;
                 default:
                     return;
@@ -88,22 +80,22 @@ public class NormalCubeItem : Item
             switch (_matchType)
             {
                 case MatchType.Green:
-                    newSprite = _imageRepo.GreenCubeB;
+                    newSprite = ItemImageRepo.Instance.GreenCubeB;
                     break;
                 case MatchType.Yellow:
-                    newSprite = _imageRepo.YellowCubeB;
+                    newSprite = ItemImageRepo.Instance.YellowCubeB;
                     break;
                 case MatchType.Blue:
-                    newSprite = _imageRepo.BlueCubeB;
+                    newSprite = ItemImageRepo.Instance.BlueCubeB;
                     break;
                 case MatchType.Red:
-                    newSprite = _imageRepo.RedCubeB;
+                    newSprite = ItemImageRepo.Instance.RedCubeB;
                     break;
                 case MatchType.Purple:
-                    newSprite = _imageRepo.PurpleCubeB;
+                    newSprite = ItemImageRepo.Instance.PurpleCubeB;
                     break;
                 case MatchType.Pink:
-                    newSprite = _imageRepo.PinkCubeB;
+                    newSprite = ItemImageRepo.Instance.PinkCubeB;
                     break;
                 default:
                     return;
@@ -113,22 +105,48 @@ public class NormalCubeItem : Item
             switch (_matchType)
             {
                 case MatchType.Green:
-                    newSprite = _imageRepo.GreenCubeC;
+                    newSprite = ItemImageRepo.Instance.GreenCubeC;
                     break;
                 case MatchType.Yellow:
-                    newSprite = _imageRepo.YellowCubeC;
+                    newSprite = ItemImageRepo.Instance.YellowCubeC;
                     break;
                 case MatchType.Blue:
-                    newSprite = _imageRepo.BlueCubeC;
+                    newSprite = ItemImageRepo.Instance.BlueCubeC;
                     break;
                 case MatchType.Red:
-                    newSprite = _imageRepo.RedCubeC;
+                    newSprite = ItemImageRepo.Instance.RedCubeC;
                     break;
                 case MatchType.Purple:
-                    newSprite = _imageRepo.PurpleCubeC;
+                    newSprite = ItemImageRepo.Instance.PurpleCubeC;
                     break;
                 case MatchType.Pink:
-                    newSprite = _imageRepo.PinkCubeC;
+                    newSprite = ItemImageRepo.Instance.PinkCubeC;
+                    break;
+                default:
+                    return;
+            }
+        }
+        else
+        {
+            switch (_matchType)
+            {
+                case MatchType.Green:
+                    newSprite = ItemImageRepo.Instance.GreenCubeDefault;
+                    break;
+                case MatchType.Yellow:
+                    newSprite = ItemImageRepo.Instance.YellowCubeDefault;
+                    break;
+                case MatchType.Blue:
+                    newSprite = ItemImageRepo.Instance.BlueCubeDefault;
+                    break;
+                case MatchType.Red:
+                    newSprite = ItemImageRepo.Instance.RedCubeDefault;
+                    break;
+                case MatchType.Purple:
+                    newSprite = ItemImageRepo.Instance.PurpleCubeDefault;
+                    break;
+                case MatchType.Pink:
+                    newSprite = ItemImageRepo.Instance.PinkCubeDefault;
                     break;
                 default:
                     return;

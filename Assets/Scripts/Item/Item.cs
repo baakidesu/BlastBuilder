@@ -22,22 +22,22 @@ public class Item : MonoBehaviour
     
     #region Privates
 
-    private float _spriteSize = 0.7f;
+    private float _spriteSize = 0.44f;
     
     private const int BaseSortingOrder = 10;
     private static int _childSpriteOrder;
 
-    private FallAnimation fallAnimation;
+    public FallAnimation fallAnimation;
 
     #endregion
 
     #region Injections
 
-    [Inject]
+    /*[Inject]
     void Construct(FallAnimation _fallAnimation)
     {
         fallAnimation = _fallAnimation;
-    }
+    }*/
 
     #endregion
     public Cell Cell // For reaching the item's cell.
@@ -63,18 +63,18 @@ public class Item : MonoBehaviour
     public void Prepare(ItemBase itemBase, Sprite sprite)
     {
         spriteRenderer = CreateSprite(sprite);
-
+        
         itemType = itemBase.itemType;
         canClickable = itemBase.canClickable;
         canExplode = itemBase.canExplode;
         canFall = itemBase.canFall;
-        //fallAnimation = itemBase.fallAnimation; Delete this.
+        fallAnimation = itemBase.fallAnimation;
         health = itemBase.health;
         
         fallAnimation.item = this;
     }
     private SpriteRenderer CreateSprite(Sprite sprite)
-    {
+    { 
         var _spriteRenderer = new GameObject("Sprite: " + _childSpriteOrder).AddComponent<SpriteRenderer>();
         
         _spriteRenderer.transform.SetParent(transform);

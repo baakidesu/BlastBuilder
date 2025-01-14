@@ -9,13 +9,10 @@ public class GameLifeTimeScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         
-        Debug.Log("GameLifeTimeScope Configure");
         builder.RegisterComponentInHierarchy<GameInjector>().AsSelf();
         
-        Debug.Log("Gamegrid Register");
         builder.RegisterComponentInHierarchy<GameGrid>().AsSelf();
         
-        Debug.Log("LevelController Register");
         builder.RegisterComponentInHierarchy<LevelController>().AsSelf();
         
         builder.RegisterComponentInHierarchy<ResizeBorders>().AsSelf();
