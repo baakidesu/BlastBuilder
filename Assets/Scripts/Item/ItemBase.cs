@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ItemBase : MonoBehaviour
 {
-    public ItemType ItemType;
-    public bool Clickable = true;
-    public bool IsFallable = true;
-    public bool InterectWithExplode = false;
-    public int Health = 1;
-    public FallAnimation FallAnimation;
+    public ItemType itemType;
+    public bool canClickable = true;
+    public bool canFall = true;
+    public bool canExplode;
+    public int health = 1;
+    public FallAnimation fallAnimation;
 }

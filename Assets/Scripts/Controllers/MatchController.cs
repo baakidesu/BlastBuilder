@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallAnimation : MonoBehaviour
+public class MatchController : Singleton<MatchController>
 {
-    public Item item;
+    
 }

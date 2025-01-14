@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Cell
+    uniqueID: 2811074019
+    locked: 0
+  - name: Item
+    uniqueID: 2341402859
+    locked: 0
+  - name: Particle
+    uniqueID: 341467887
+    locked: 0
+  - name: UI
+    uniqueID: 1260654477
+    locked: 0
+  - name: Background
+    uniqueID: 1962408037
+    locked: 0

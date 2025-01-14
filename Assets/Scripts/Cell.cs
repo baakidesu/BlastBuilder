@@ -129,10 +129,8 @@ public class Cell : MonoBehaviour
         {
             return;
         }
-        
         //TODO
         //MatchingManager.Instance.ExplodeMatchingCells(this);
-
     }
     private void UpdateName()
     {

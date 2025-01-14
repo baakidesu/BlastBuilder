@@ -48,4 +48,9 @@ public class LevelController : MonoBehaviour
         Debug.Log(levelName);
         return levelInfo;
     }
+
+    private void PrepareLevel()
+    {
+        //levelData = newLevelData()
+    }
 }
