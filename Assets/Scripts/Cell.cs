@@ -91,19 +91,19 @@ public class Cell : MonoBehaviour
     private Cell GetAllNeighbourWithDirection(Direction direction)
     {
         var dumpX = x;
-        var dumpY = x;
+        var dumpY = y;
 
         switch (direction)
         {
             case Direction.None: break;
-            case Direction.Right:     x += 1;         break;
-            case Direction.Left:      x -= 1;         break;
-            case Direction.UpRight:   x += 1; y += 1; break;
-            case Direction.DownRight: x += 1; y -= 1; break;
-            case Direction.UpLeft:    x -= 1; y += 1; break;
-            case Direction.DownLeft:  x -= 1; y -= 1; break;
-            case Direction.Up:                y += 1; break;
-            case Direction.Down:              y -= 1; break;
+            case Direction.Right:     dumpX += 1;         break;
+            case Direction.Left:      dumpX -= 1;         break;
+            case Direction.UpRight:   dumpX += 1; dumpY += 1; break;
+            case Direction.DownRight: dumpX += 1; dumpY -= 1; break;
+            case Direction.UpLeft:    dumpX -= 1; dumpY += 1; break;
+            case Direction.DownLeft:  dumpX -= 1; dumpY -= 1; break;
+            case Direction.Up:                dumpY += 1; break;
+            case Direction.Down:              dumpY -= 1; break;
         }
 
         if (dumpX >= gameGrid.colums || dumpY >= gameGrid.rows || dumpX < 0 || dumpY < 0) return null;

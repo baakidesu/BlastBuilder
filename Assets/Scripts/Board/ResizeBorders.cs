@@ -10,7 +10,6 @@ public class ResizeBorders : MonoBehaviour
     [Inject]
     void Construct(GameGrid _gameGrid)
     {
-        Debug.Log("ResizeBorders constructed");
         gameGrid = _gameGrid;
     }
     

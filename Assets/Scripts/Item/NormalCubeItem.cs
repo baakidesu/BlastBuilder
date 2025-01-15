@@ -38,16 +38,18 @@ public class NormalCubeItem : Item
 
     public override void HintUpdateToSprite(ItemType itemType, int matchCount)
     {
-        if (itemType == ItemType.Hint)
+        var imageRepo = ItemImageRepo.Instance;
+        
+        if (matchCount > 3)
         {
-            UpdateColorfulSprite(matchCount);
+            UpdateColorfulSprite(imageRepo,matchCount);
         }else
         {
             UpdateSprite(GetSpritesForType());
         }
     }
     
-    private void UpdateColorfulSprite(int matchedCount) //junk code update this.
+    private void UpdateColorfulSprite(ItemImageRepo itemRepo,int matchedCount) //junk code update this.
     {
         Sprite newSprite;
         if (matchedCount > 4 && matchedCount < 8) //A
@@ -55,102 +57,106 @@ public class NormalCubeItem : Item
             switch (_matchType)
             {
                 case MatchType.Green:
-                    newSprite = ItemImageRepo.Instance.GreenCubeA;
+                    newSprite = itemRepo.GreenCubeA;
                     break;
                 case MatchType.Yellow:
-                    newSprite = ItemImageRepo.Instance.YellowCubeA;
+                    newSprite = itemRepo.YellowCubeA;
                     break;
                 case MatchType.Blue:
-                    newSprite = ItemImageRepo.Instance.BlueCubeA;
+                    newSprite = itemRepo.BlueCubeA;
                     break;
                 case MatchType.Red:
-                    newSprite = ItemImageRepo.Instance.RedCubeA;
+                    newSprite = itemRepo.RedCubeA;
                     break;
                 case MatchType.Purple:
-                    newSprite = ItemImageRepo.Instance.PurpleCubeA;
+                    newSprite = itemRepo.PurpleCubeA;
                     break;
                 case MatchType.Pink:
-                    newSprite = ItemImageRepo.Instance.PinkCubeA;
+                    newSprite = itemRepo.PinkCubeA;
                     break;
                 default:
                     return;
             }
+            UpdateSprite(newSprite);
         }else if (matchedCount > 7 && matchedCount < 10) //B
         {
             switch (_matchType)
             {
                 case MatchType.Green:
-                    newSprite = ItemImageRepo.Instance.GreenCubeB;
+                    newSprite = itemRepo.GreenCubeB;
                     break;
                 case MatchType.Yellow:
-                    newSprite = ItemImageRepo.Instance.YellowCubeB;
+                    newSprite = itemRepo.YellowCubeB;
                     break;
                 case MatchType.Blue:
-                    newSprite = ItemImageRepo.Instance.BlueCubeB;
+                    newSprite = itemRepo.BlueCubeB;
                     break;
                 case MatchType.Red:
-                    newSprite = ItemImageRepo.Instance.RedCubeB;
+                    newSprite = itemRepo.RedCubeB;
                     break;
                 case MatchType.Purple:
-                    newSprite = ItemImageRepo.Instance.PurpleCubeB;
+                    newSprite = itemRepo.PurpleCubeB;
                     break;
                 case MatchType.Pink:
-                    newSprite = ItemImageRepo.Instance.PinkCubeB;
+                    newSprite = itemRepo.PinkCubeB;
                     break;
                 default:
                     return;
             }
+            UpdateSprite(newSprite);
         }else if (matchedCount > 9) //C
         {
             switch (_matchType)
             {
                 case MatchType.Green:
-                    newSprite = ItemImageRepo.Instance.GreenCubeC;
+                    newSprite = itemRepo.GreenCubeC;
                     break;
                 case MatchType.Yellow:
-                    newSprite = ItemImageRepo.Instance.YellowCubeC;
+                    newSprite = itemRepo.YellowCubeC;
                     break;
                 case MatchType.Blue:
-                    newSprite = ItemImageRepo.Instance.BlueCubeC;
+                    newSprite = itemRepo.BlueCubeC;
                     break;
                 case MatchType.Red:
-                    newSprite = ItemImageRepo.Instance.RedCubeC;
+                    newSprite = itemRepo.RedCubeC;
                     break;
                 case MatchType.Purple:
-                    newSprite = ItemImageRepo.Instance.PurpleCubeC;
+                    newSprite = itemRepo.PurpleCubeC;
                     break;
                 case MatchType.Pink:
-                    newSprite = ItemImageRepo.Instance.PinkCubeC;
+                    newSprite = itemRepo.PinkCubeC;
                     break;
                 default:
                     return;
             }
+            UpdateSprite(newSprite);
         }
         else
         {
             switch (_matchType)
             {
                 case MatchType.Green:
-                    newSprite = ItemImageRepo.Instance.GreenCubeDefault;
+                    newSprite = itemRepo.GreenCubeDefault;
                     break;
                 case MatchType.Yellow:
-                    newSprite = ItemImageRepo.Instance.YellowCubeDefault;
+                    newSprite = itemRepo.YellowCubeDefault;
                     break;
                 case MatchType.Blue:
-                    newSprite = ItemImageRepo.Instance.BlueCubeDefault;
+                    newSprite = itemRepo.BlueCubeDefault;
                     break;
                 case MatchType.Red:
-                    newSprite = ItemImageRepo.Instance.RedCubeDefault;
+                    newSprite = itemRepo.RedCubeDefault;
                     break;
                 case MatchType.Purple:
-                    newSprite = ItemImageRepo.Instance.PurpleCubeDefault;
+                    newSprite = itemRepo.PurpleCubeDefault;
                     break;
                 case MatchType.Pink:
-                    newSprite = ItemImageRepo.Instance.PinkCubeDefault;
+                    newSprite = itemRepo.PinkCubeDefault;
                     break;
                 default:
                     return;
             }
+            UpdateSprite(newSprite);
         }
     }
 

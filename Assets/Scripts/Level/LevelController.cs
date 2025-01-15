@@ -48,8 +48,6 @@ public class LevelController : MonoBehaviour
             moveCount = levelDataFromScriptableObject.moveCount,
             grid = levelDataFromScriptableObject.grid
         };
-
-        Debug.Log(levelName);
         return levelInfo;
     }
 

@@ -32,18 +32,14 @@ public class GameGrid : MonoBehaviour
    [Inject]
     void Construct(LevelController _levelController)
     {
-        Debug.Log("Game Grid constructed");
         levelController = _levelController;
     }
 
     #endregion
-
+    
     private void Awake()
     {
-        Debug.Log("Game Grid started");
-       
         LoadLevelInfo();
-        Debug.Log("Row:" + levelInfo.gridWidth + " Col:" + levelInfo.gridHeight);
         InitCells(); //Initialize Cells
         PrepareCells();
     }
@@ -58,13 +54,10 @@ public class GameGrid : MonoBehaviour
     private void PrepareCells()
     {
         for (int y = 0; y < rows; y++)
-        {
             for (int x = 0; x < colums; x++)
             {
                 Cells[x, y].Prepare(x, y, this);
             }
-        }
-
     }
 
     private void CreateCells()
