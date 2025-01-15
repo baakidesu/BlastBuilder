@@ -114,7 +114,7 @@ public class Item : MonoBehaviour
     public void Fall()
     {
         if(canFall) return;
-        
-        //FallAnimation.Fall
+
+        fallAnimation.Fall(cell.GetFallTarget());
     }
 }

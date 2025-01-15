@@ -130,7 +130,7 @@ public class Cell : MonoBehaviour
             return;
         }
         //TODO
-        //MatchingManager.Instance.ExplodeMatchingCells(this);
+        MatchController.Instance.ExplodeMatchingCells(this);
     }
     private void UpdateName()
     {
