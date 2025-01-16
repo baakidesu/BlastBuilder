@@ -33,6 +33,7 @@ public class LevelController : MonoBehaviour
     private void Start()
     {
         PrepareLevel();
+        InitializeDropFilController();
     }
 
     public LevelInfo GetLevelInfo(int levelIndex)
@@ -69,5 +70,10 @@ public class LevelController : MonoBehaviour
                 item.transform.position = cell.transform.position;
             }
         }
+    }
+
+    private void InitializeDropFilController()
+    {
+        DropFillController.Instance.Initialize(gameGrid, levelData);
     }
 }

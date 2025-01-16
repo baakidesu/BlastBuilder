@@ -11,7 +11,7 @@ public class Item : MonoBehaviour
     
     public ItemType itemType;
     public bool canClickable = true;
-    public bool canFall = true;
+    public bool canFall;
     public bool canExplode = false;
     public int health = 1;
     
@@ -113,7 +113,7 @@ public class Item : MonoBehaviour
     }
     public void Fall()
     {
-        if(canFall) return;
+        if(!canFall) return;
 
         fallAnimation.Fall(cell.GetFallTarget());
     }

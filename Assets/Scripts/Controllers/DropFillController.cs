@@ -17,6 +17,12 @@ public class DropFillController : Singleton<DropFillController>
         DoFalls();
         DoFills();
     }
+    public void Initialize(GameGrid gameGrid, LevelData levelData)
+    {
+        _gameGrid = gameGrid;
+        FindFillingCells();
+        StartFall();
+    }
     private void DoFills()
     {
         for (int i = 0; i < fillingCells.Length; i++)
@@ -52,21 +58,14 @@ public class DropFillController : Singleton<DropFillController>
                 cell.item.Fall();
             }
         }
-    }
-
-    public void Initialize(GameGrid gameGrid, LevelData levelData)
-    {
-        _gameGrid = gameGrid;
-        FindFillingCells();
-        StartFall();
-    }
+    } 
     private void FindFillingCells()
     {
         var listOfCells = new List<Cell>();
 
         for (int y = 0; y < _gameGrid.rows; y++)
         {
-            for (int x = 0; x < _gameGrid.rows; x++)
+            for (int x = 0; x < _gameGrid.colums; x++)
             {
                 var cell = _gameGrid.Cells[x, y];
 
@@ -83,7 +82,7 @@ public class DropFillController : Singleton<DropFillController>
         
         for (int y = 0; y < _gameGrid.rows; y++)
         {
-            for (int x = 0; x < _gameGrid.rows; x++)
+            for (int x = 0; x < _gameGrid.colums; x++)
             {
                 var cell = _gameGrid.Cells[x, y];
 

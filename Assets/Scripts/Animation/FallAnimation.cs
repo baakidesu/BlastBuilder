@@ -19,7 +19,7 @@ public class FallAnimation : MonoBehaviour
 
     public void Fall(Cell targetCell)
     {
-        if (!IsValidTarget(targetCell)) return;
+        if (IsInvalidTarget(targetCell)) return;
 
         UpdateTargetCell(targetCell);
         StartFall();
@@ -33,19 +33,13 @@ public class FallAnimation : MonoBehaviour
     private void UpdateTargetCell(Cell targetCell)
     {
         target = targetCell;
-        item.cell = target;
+        item.Cell = target;
         _targetPos = target.transform.position;
     }
 
-    private bool IsValidTarget(Cell targetCell)
+    private bool IsInvalidTarget(Cell targetCell)
     {
-        if (target != null && targetCell.y >= target.y) 
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return target != null && targetCell.y >= target.y;
+
     }
 }

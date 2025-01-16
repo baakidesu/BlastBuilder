@@ -162,8 +162,8 @@ public class NormalCubeItem : Item
 
     public override void Execute()
     {
-        //ParticleManager.Instance.PlayParticle(this);
-        //AudioManager.Instance.PlayEffect(SoundID);
+        ParticlesController.Instance.PlayParticleSystem(this);
+        //AudioController.Instance.PlaySoundEffect(SoundEffects.Cube);
         base.Execute();
     }
 }
