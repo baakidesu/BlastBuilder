@@ -214,7 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundIDClipPairs:
   - SoundID: 1
-    AudioClip: {fileID: 8300000, guid: 42d1183e14cdb094095bcefa23870472, type: 3}
+    AudioClip: {fileID: 8300000, guid: 7567ae7eac8a3794d9a431d33e0af82f, type: 3}
   musicSource: {fileID: 1152324393}
   effectSource: {fileID: 751131691}
 --- !u!1 &500209771
@@ -382,7 +382,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 42d1183e14cdb094095bcefa23870472, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7567ae7eac8a3794d9a431d33e0af82f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1291,8 +1291,8 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 519420032}
   - {fileID: 1350501378}
-  - {fileID: 1118346017}
-  - {fileID: 1259060344}
   - {fileID: 1021566772}
+  - {fileID: 519420032}
+  - {fileID: 1259060344}
+  - {fileID: 1118346017}

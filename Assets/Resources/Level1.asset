@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 1
   gridWidth: 10
-  gridHeight: 12
+  gridHeight: 5
   moveCount: 20
   grid: []

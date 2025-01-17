@@ -163,7 +163,7 @@ public class NormalCubeItem : Item
     public override void Execute()
     {
         ParticlesController.Instance.PlayParticleSystem(this);
-        //AudioController.Instance.PlaySoundEffect(SoundEffects.Cube);
+        AudioController.Instance.PlaySoundEffect(SoundEffects.Cube);
         base.Execute();
     }
 }

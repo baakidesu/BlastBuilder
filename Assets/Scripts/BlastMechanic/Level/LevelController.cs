@@ -29,11 +29,17 @@ public class LevelController : MonoBehaviour
     }
     
     #endregion
-    
     private void Start()
     {
+        LimitFps();// I limit the fps for battery life.
         PrepareLevel();
         InitializeDropFilController();
+    }
+
+    private void LimitFps()
+    {
+        int refreshRate = Screen.currentResolution.refreshRate;
+        Application.targetFrameRate = (refreshRate >= 90) ? 90 : 60; 
     }
 
     public LevelInfo GetLevelInfo(int levelIndex)
