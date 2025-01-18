@@ -45,7 +45,7 @@ public class LevelController : MonoBehaviour
     public LevelInfo GetLevelInfo(int levelIndex)
     {
         string levelName = "Level" + levelIndex.ToString();
-        levelDataFromScriptableObject = Resources.Load<LevelScriptableObject>(levelName);
+        levelDataFromScriptableObject = Resources.Load<LevelScriptableObject>("Levels/" + levelName);
         
         LevelInfo levelInfo = new LevelInfo
         {

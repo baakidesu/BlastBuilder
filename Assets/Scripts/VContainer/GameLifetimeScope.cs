@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using VContainer;
 using VContainer.Unity;
 
@@ -8,7 +9,6 @@ public class GameLifeTimeScope : LifetimeScope
 {
     protected override void Configure(IContainerBuilder builder)
     {
-        
         builder.RegisterComponentInHierarchy<GameInjector>().AsSelf();
         
         builder.RegisterComponentInHierarchy<GameGrid>().AsSelf();
@@ -20,5 +20,6 @@ public class GameLifeTimeScope : LifetimeScope
         builder.Register<DropFillController>(Lifetime.Singleton);
         builder.Register<ItemFactory>(Lifetime.Singleton);
         builder.Register<MatchController>(Lifetime.Singleton);
+        
     }
 }

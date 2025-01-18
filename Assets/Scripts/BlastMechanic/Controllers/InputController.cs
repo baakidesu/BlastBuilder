@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public class InputController : MonoBehaviour
 {
     [SerializeField] private new Camera camera;
-    [SerializeField] private GameGrid board; 
+    [SerializeField] private GameGrid board;
+    private MapController _mapController;
+
+    [Inject]
+    void Construct(MapController mapController)
+    {
+        _mapController = mapController;
+    }
         private void Update()
         {
         #if UNITY_EDITOR
@@ -41,6 +49,11 @@ public class InputController : MonoBehaviour
             if (hit != null && hit.CompareTag("Cell"))
             {
                 hit.GetComponent<Cell>().CellTapped();
+            }
+            else if(hit != null && hit.CompareTag("Building"))
+            {
+                Debug.Log("za:" + _mapController + " name: " + hit.gameObject.name);
+                _mapController.OnBuildingClick(int.Parse(hit.gameObject.name));
             }
         }
         private void DisableTouch()

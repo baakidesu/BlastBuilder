@@ -85,9 +85,8 @@ public class GameGrid : MonoBehaviour
 
     private void LoadLevelInfo()
     {
-        //int levelIndex = PlayerPrefs.GetInt("Level"); 
-
-        int levelIndex = 1;
+        int levelIndex = PlayerPrefs.GetInt("Level");
+        Debug.Log("levelindex: "+ levelIndex);
         levelInfo = levelController.GetLevelInfo(levelIndex);
 
         rows = levelInfo.gridHeight;
