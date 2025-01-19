@@ -132,7 +132,7 @@ public class MatchController : Singleton<MatchController>
             item.Execute();
         }
         
-       // _ = MovesManager.Instance.DecreaseMovesAsync();
+       _ = GameController.Instance.DecreaseMovesAsync();
     } 
     private void ExplodeValidCellsInNeighbours(Cell cell, List<Cell> previousCells)
     {

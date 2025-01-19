@@ -14,10 +14,9 @@ public class GameGrid : MonoBehaviour
     #region Publics
 
     public LevelInfo levelInfo;
-    
-    public int rows { get; private set; }
+    public int _moveCount; 
+    public int rows { get; private set; } 
     public int colums { get; private set; }
-
     public Cell[,] Cells { get; private set; }
     
     public Transform cellsParent;
@@ -82,8 +81,8 @@ public class GameGrid : MonoBehaviour
         Debug.Log("levelindex: "+ levelIndex);
         levelInfo = levelController.GetLevelInfo(levelIndex);
 
+        _moveCount = levelInfo.moveCount;
         rows = levelInfo.gridHeight;
         colums = levelInfo.gridWidth;
-
     }
 }

@@ -45,4 +45,9 @@ public class AudioController : Singleton<AudioController>
         
         effectSource.PlayOneShot(soundEffectToClipMap[soundEffect]);
     }
+
+    public void StopBackgroundMusic()
+    {
+        musicSource.Stop();
+    }
 }
