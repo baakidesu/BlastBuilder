@@ -53,6 +53,7 @@ public class GameController : Singleton<GameController>
 
     public void ReturnMap()
     {
+        PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level")+1);
         SceneManager.LoadScene("Main");
     }
 }

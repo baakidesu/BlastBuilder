@@ -50,11 +50,6 @@ public class InputController : MonoBehaviour
             {
                 hit.GetComponent<Cell>().CellTapped();
             }
-            else if(hit != null && hit.CompareTag("Building"))
-            {
-                Debug.Log("za:" + _mapController + " name: " + hit.gameObject.name);
-                _mapController.OnBuildingClick(int.Parse(hit.gameObject.name));
-            }
         }
         private void DisableTouch()
         {

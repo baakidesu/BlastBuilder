@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,9 @@ public class MapController : MonoBehaviour
      [Header("Story Sprites")]
      [SerializeField] private List<Sprite> stories;
      [Space(10)]
+     
+     [Header("Play Button")]
+     [SerializeField] private GameObject playButton;
 
      [SerializeField] private AudioClip buttonClickSound;
      
@@ -39,14 +43,20 @@ public class MapController : MonoBehaviour
           if (PlayerPrefs.GetFloat("playerReadStory") != 1)
           {
                panelSpriteRenderer = storyPanel.GetComponent<Image>();
-               panelSpriteRenderer.sprite = stories[storyIndex];  
+               panelSpriteRenderer.sprite = stories[storyIndex];
+               PlayerPrefs.SetInt("Level",1);
           }else
           {
                Destroy(storyPanel);
                Destroy(storyButton);
           }
      }
-     
+
+     private void Start()
+     {
+          Debug.Log(PlayerPrefs.GetInt("Level"));
+     }
+
      public void OnStoryClick()
      {
           storyIndex++;
@@ -72,6 +82,7 @@ public class MapController : MonoBehaviour
      {
           ButtonClickSoundPlay();
           playGamePanel.SetActive(false);
+          playButton.SetActive(true);
      }
 
      public void OnBuildingClick(int buildingIndex)
@@ -86,5 +97,11 @@ public class MapController : MonoBehaviour
      private void ButtonClickSoundPlay()
      {
           _audioSource.Play();
+     }
+
+     public void OnPlayButton()
+     {
+          OnBuildingClick(PlayerPrefs.GetInt("Level")+1);
+          playButton.SetActive(false);
      }
 }
