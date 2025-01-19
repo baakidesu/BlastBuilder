@@ -59,7 +59,7 @@ public class Item : MonoBehaviour
                 gameObject.name = cell.gameObject.name + " " + GetType().Name;
             }
         }
-    }
+    } 
     public void Prepare(ItemBase itemBase, Sprite sprite)
     {
         spriteRenderer = CreateSprite(sprite);

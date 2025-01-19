@@ -10,6 +10,13 @@ public class DropFillController : Singleton<DropFillController>
     private bool isActive;
     private GameGrid _gameGrid;
     private Cell[] fillingCells;
+    private ItemFactory _itemFactory;
+
+    /*[Inject]
+    void Construct(ItemFactory itemFactory)
+    {
+        _itemFactory = itemFactory;
+    }*/
     private void Update()
     {
         if (!isActive) return;
@@ -31,7 +38,7 @@ public class DropFillController : Singleton<DropFillController>
 
             if (cell.item == null)
             {
-                cell.item = ItemFactory.Instance.CreateItem(LevelData.GetRandomCubeItemType(), _gameGrid.itemsParent);
+                cell.item = ItemFactory.Instance.CreateItem(LevelData.GetRandomCubeItemType(), _gameGrid.itemsParent); //itemFactory
 
                 float posY = 0;
                 var targetCell = cell.GetFallTarget().firstCellBelow;

@@ -27,8 +27,6 @@ public class Cell : MonoBehaviour
     private Item _item;
 
     #endregion
-
-    
     public Item item // For reaching the cell's item.
     {
         get

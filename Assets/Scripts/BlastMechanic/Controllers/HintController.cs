@@ -12,13 +12,11 @@ public class HintController : MonoBehaviour
     void Construct(GameGrid gameGrid)
     {
         _gameGrid = gameGrid;
-    }*/
-
+    }*/ 
     private void Update()
     {
         Hint();
-    }
-
+    } 
     private void Hint()
     {
         var visitedCells = new List<Cell>();
@@ -45,14 +43,11 @@ public class HintController : MonoBehaviour
                 }
             }
         }
-    }
-
+    } 
     private void SpriteUpdateForHint(Item item, int count)
     {
         item.HintUpdateToSprite(item.itemType, count);
-    }
-    
-
+    } 
     private void CheckHint(Item item, int count)
     {
         if (count > 1)
@@ -60,7 +55,6 @@ public class HintController : MonoBehaviour
             //if (item.Particle != null) return;
         }
     }
-
     private void HintSpriteUpdate(Item item, int matchedCount)
     {
         if (matchedCount > 4) //A,B,C

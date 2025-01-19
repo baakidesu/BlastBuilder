@@ -11,7 +11,6 @@ public class GameGrid : MonoBehaviour
     
     #endregion
     
-    
     #region Publics
 
     public LevelInfo levelInfo;
@@ -36,21 +35,18 @@ public class GameGrid : MonoBehaviour
     }
 
     #endregion
-    
     private void Awake()
     {
         LoadLevelInfo();
         InitCells(); //Initialize Cells
         PrepareCells();
-    }
-    
+    } 
     private void InitCells() 
     {
         Cells = new Cell[colums, rows];
         ResizeBoard(rows, colums);
         CreateCells();
-    }
-
+    } 
     private void PrepareCells()
     {
         for (int y = 0; y < rows; y++)
@@ -59,7 +55,6 @@ public class GameGrid : MonoBehaviour
                 Cells[x, y].Prepare(x, y, this);
             }
     }
-
     private void CreateCells()
     {
         for (int i = 0; i < rows; i++)
@@ -70,8 +65,7 @@ public class GameGrid : MonoBehaviour
             }
         }
         
-    }
-
+    } 
     private void ResizeBoard(int rows, int colums)
     {
         Transform currentTransform = this.transform;
@@ -81,8 +75,7 @@ public class GameGrid : MonoBehaviour
         
         transform.localPosition = new Vector3(newX, newY, currentTransform.position.z);
 
-    }
-
+    } 
     private void LoadLevelInfo()
     {
         int levelIndex = PlayerPrefs.GetInt("Level");

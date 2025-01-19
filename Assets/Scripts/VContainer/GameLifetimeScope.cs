@@ -16,9 +16,9 @@ public class GameLifeTimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<LevelController>().AsSelf();
         
         builder.RegisterComponentInHierarchy<ResizeBorders>().AsSelf();
-        
-        builder.Register<DropFillController>(Lifetime.Singleton);
-        builder.Register<ItemFactory>(Lifetime.Singleton);
+
+        builder.RegisterComponentInHierarchy<DropFillController>().AsSelf();
+        builder.RegisterComponentInHierarchy<ItemFactory>().AsSelf(); //??????
         builder.Register<MatchController>(Lifetime.Singleton);
         
     }
