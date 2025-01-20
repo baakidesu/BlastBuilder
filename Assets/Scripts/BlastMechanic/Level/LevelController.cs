@@ -20,25 +20,25 @@ public class LevelController : MonoBehaviour
     private LevelData levelData;
     private ItemFactory _itemFactory;
     private AudioController _audioController;
-    [SerializeField] private GameGrid _gameGrid;
+    private GameGrid _gameGrid;
 
     #endregion
 
     #region Injections
 
     [Inject]
-    void Construct(ItemFactory itemFactory, DropFillController dropFillController, AudioController audioController)
+    void Construct(ItemFactory itemFactory, DropFillController dropFillController, AudioController audioController, GameGrid gameGrid)
     {
         _itemFactory = itemFactory;
         _dropFillController = dropFillController;
         _audioController = audioController;
-        //_gameGrid = gameGrid;
+        _gameGrid = gameGrid;
     }
     
     #endregion
     private void Start()
     {
-        //LimitFps();// I limit the fps for battery life.
+        LimitFps();// I limit the fps for battery life.
         PrepareLevel();
         InitializeDropFilController();
     }

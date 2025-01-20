@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class MatchController : Singleton<MatchController>
 {
-    [SerializeField] private GameGrid _gameGrid;
+    private GameGrid _gameGrid;
     [SerializeField] private GameObject _gameGridObject;
     private LevelController _levelController;
     private MatchController _matchController;
@@ -19,12 +19,12 @@ public class MatchController : Singleton<MatchController>
     private float timer = 0f;
     
     [Inject]
-    void Construct(LevelController levelController, GameController gameController)
+    void Construct(LevelController levelController, GameController gameController, GameGrid gameGrid)
     {
-        //_gameGrid = gameGrid;
+        _gameGrid = gameGrid;
         _levelController = levelController;
         _gameController = gameController;
-    }
+    } 
     void Start()
     {
         _visitedCells = new bool[_gameGrid.colums, _gameGrid.rows];
@@ -80,7 +80,7 @@ public class MatchController : Singleton<MatchController>
                 _visitedCells[x, y] = false;
             }
         }
-    }
+    } 
     private void FindMatchesRecursively(Cell cell, MatchType matchType, List<Cell> matchedItems) //Flood Fill Algorithm that uses DFS.
     {
         if (cell == null) return; //don't search if it is null
@@ -105,8 +105,7 @@ public class MatchController : Singleton<MatchController>
                 FindMatchesRecursively(neighbours[i], matchType, matchedItems);
             }
         }
-    }
-
+    } 
     public int CountMatchedNormalItems(List<Cell> cells)
     {
         int _count = 0;
@@ -122,6 +121,7 @@ public class MatchController : Singleton<MatchController>
         var previousCells = new List<Cell>();
 
         var validItems = FindMatches(cell, cell.item.GetMatchType());
+        var validNormalItemCount = validItems.Count;
         var validNormalItems = CountMatchedNormalItems(validItems);
 
         if (validNormalItems < _minimumNumberOfSameColors) return;
@@ -135,8 +135,19 @@ public class MatchController : Singleton<MatchController>
             var item = explodedCell.item;
             item.Execute();
         }
-        
-       _ = _gameController.DecreaseMovesAsync();
+        Debug.Log(validNormalItemCount);
+        if (validNormalItemCount is > 4 and < 8) //A State //*2
+        {
+            _gameController.points += validNormalItemCount * 2;
+        }else if (validNormalItemCount is > 7 and < 10) //B State
+        {
+            _gameController.points += validNormalItemCount * 3;
+
+        }else if (validNormalItemCount > 9) //C State 
+        {
+            _gameController.points += validNormalItemCount * 5;
+        }
+        _ = _gameController.DecreaseMovesAsync();
     } 
     private void ExplodeValidCellsInNeighbours(Cell cell, List<Cell> previousCells)
     {

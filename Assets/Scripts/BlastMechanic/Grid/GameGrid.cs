@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -5,8 +6,7 @@ public class GameGrid : MonoBehaviour
 {
     #region Privates
 
-    private LevelController levelController;
-    
+    [SerializeField] private LevelController levelController;
     [SerializeField] private Cell cellPrefab;
     
     #endregion
@@ -25,21 +25,13 @@ public class GameGrid : MonoBehaviour
 
     #endregion
 
-    #region Injections
-
-   [Inject]
-    void Construct(LevelController _levelController)
-    {
-        levelController = _levelController;
-    }
-
-    #endregion
     private void Awake()
     {
         LoadLevelInfo();
         InitCells(); //Initialize Cells
         PrepareCells();
-    } 
+    }
+
     private void InitCells() 
     {
         Cells = new Cell[colums, rows];

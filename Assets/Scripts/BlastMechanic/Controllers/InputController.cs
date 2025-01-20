@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 public class InputController : MonoBehaviour
 {
     [SerializeField] private new Camera camera;
-    [SerializeField] private GameGrid board;
-    private MapController _mapController;
+    
+    private GameGrid _gameGrid;
 
     [Inject]
-    void Construct(MapController mapController)
+    void Construct(GameGrid gameGrid)
     {
-        _mapController = mapController;
+        _gameGrid = gameGrid;
     } 
         private void Update()
         {

@@ -7,32 +7,46 @@ using VContainer;
 
 public class GameController : Singleton<GameController>
 {
-    [Header("References")]
-    [SerializeField] private GameGrid _gameGrid;
-    private LevelController _levelController;
-    [Space(10)]
-    
+    #region Publics
+
     [Header("UI Elements")]
     [SerializeField] private GameObject UIPanel;
     [SerializeField] private TMP_Text moveText;
     [SerializeField] private TMP_Text pointsText;
-    [SerializeField] private GameObject gameOverPanel;
+    [Space(10)]
 
-    private int moves;
+    [Header("Win Panel")]
+    [SerializeField] private GameObject winPanel;
+    [Space(10)]
+    
+    [Header("Lose Panel")]
+    [SerializeField] private GameObject gameOverPanel;
     
     public Action OnMovesFinished;
-    public int points;
+    [HideInInspector] public int points = 0;
+
+    #endregion
+
+    #region Privates
 
     private AudioController _audioController;
+    private int moves;
+    private GameGrid _gameGrid;
+    private LevelController _levelController;
+
+    #endregion
+
+    #region Injections
 
     [Inject]
-    void Construct(AudioController audioController, LevelController levelController)
+    void Construct(AudioController audioController, LevelController levelController, GameGrid gameGrid)
     {
-        //_gameGrid = gameGrid;
+        _gameGrid = gameGrid;
         _audioController = audioController;
         _levelController = levelController;
     }
 
+    #endregion
     private void Start()
     {
         moves = _gameGrid._moveCount;
@@ -41,7 +55,8 @@ public class GameController : Singleton<GameController>
     public async Task DecreaseMovesAsync()
     {
         moves--;
-
+        pointsText.text = points.ToString();
+        
         if (moves <= 0)
         {
             GetComponent<InputController>().enabled = false;
@@ -52,19 +67,26 @@ public class GameController : Singleton<GameController>
             _audioController.StopBackgroundMusic();
             _audioController.PlaySoundEffect(SoundEffects.LevelEnd);
             UIPanel.SetActive(false);
-            gameOverPanel.SetActive(true);
+
+            if (points >= _levelController.levelDataFromScriptableObject.pointToGather) //win
+            {
+                winPanel.SetActive(true);
+                _levelController.levelDataFromScriptableObject.didWin = true;
+                PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level")+1);
+            }else
+            {
+                gameOverPanel.SetActive(true);
+            }
         }
         
         moveText.text = moves.ToString();
-    }
-
+    } 
     public void ReturnMap()
     {
-        PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level")+1);
-        if (true) //kazandıysa
-        {
-            _levelController.levelDataFromScriptableObject.didWin = true;
-        }
         SceneManager.LoadScene("Main");
+    } 
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene("Blast");
     }
 }

@@ -6,13 +6,13 @@ using VContainer;
 
 public class HintController : MonoBehaviour
 {
-    [SerializeField] private GameGrid _gameGrid;
+    private GameGrid _gameGrid;
     private MatchController _matchController;
 
     [Inject]
-    void Construct(MatchController matchController)
+    void Construct(MatchController matchController, GameGrid gameGrid)
     {
-        //_gameGrid = gameGrid;
+        _gameGrid = gameGrid;
         _matchController = matchController;
     } 
     private void Update()
@@ -40,21 +40,9 @@ public class HintController : MonoBehaviour
                 {
                     var thisItem = validCells[i].item;
 
-                    //CheckHint(thisItem, validNormalItemCount);
                     HintSpriteUpdate(thisItem, validNormalItemCount);
                 }
             }
-        }
-    } 
-    private void SpriteUpdateForHint(Item item, int count)
-    {
-        item.HintUpdateToSprite(item.itemType, count);
-    } 
-    private void CheckHint(Item item, int count)
-    {
-        if (count > 1)
-        {
-            //if (item.Particle != null) return;
         }
     }
     private void HintSpriteUpdate(Item item, int matchedCount)
