@@ -8,7 +8,6 @@ public class LevelData
 {
    public ItemType[,] GridData { get; protected set; }
    
-   
    private static readonly Random _random = new Random(); 
    public static int GetRandomNumber(int min, int max) //Faster than unity's random.
    {
@@ -16,8 +15,7 @@ public class LevelData
       {
          return _random.Next(min, max);
       }
-   }
-
+   } 
    public LevelData(LevelInfo levelInfo)
    {
       GridData = new ItemType[levelInfo.gridHeight,levelInfo.gridWidth];
@@ -29,7 +27,6 @@ public class LevelData
          }
       
    }
-
    public static ItemType GetRandomCubeItemType()
    {
       return ((ItemType[]) Enum.GetValues(typeof(ItemType)))[GetRandomNumber(1,7)];

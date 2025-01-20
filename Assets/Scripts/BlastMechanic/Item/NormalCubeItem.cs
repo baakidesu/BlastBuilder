@@ -4,29 +4,29 @@ using VContainer;
 public class NormalCubeItem : Item
 {
     private MatchType _matchType;
+    private ItemImageRepo _itemImageRepo = ItemImageRepo.Instance;
     public void PrepareNormalCubeItem(ItemBase itemBase, MatchType matchType)
     {
         _matchType = matchType;
         itemBase.canClickable = true;
         Prepare(itemBase, GetSpritesForType());
-    }
-
+    } 
     private Sprite GetSpritesForType()
     {
         switch (_matchType)
         {
             case MatchType.Green:
-                return ItemImageRepo.Instance.GreenCubeDefault;
+                return _itemImageRepo.GreenCubeDefault;
             case MatchType.Yellow:
-                return ItemImageRepo.Instance.YellowCubeDefault;
+                return _itemImageRepo.YellowCubeDefault;
             case MatchType.Blue:
-                return ItemImageRepo.Instance.BlueCubeDefault;
+                return _itemImageRepo.BlueCubeDefault;
             case MatchType.Red:
-                return ItemImageRepo.Instance.RedCubeDefault;
+                return _itemImageRepo.RedCubeDefault;
             case MatchType.Pink:
-                return ItemImageRepo.Instance.PinkCubeDefault; 
+                return _itemImageRepo.PinkCubeDefault; 
             case MatchType.Purple:
-                return ItemImageRepo.Instance.PurpleCubeDefault;
+                return _itemImageRepo.PurpleCubeDefault;
         }
         return null;
     }
@@ -34,45 +34,35 @@ public class NormalCubeItem : Item
     public override MatchType GetMatchType()
     {
         return _matchType;
-    }
-
+    } 
     public override void HintUpdateToSprite(ItemType itemType, int matchCount)
     {
-        var imageRepo = ItemImageRepo.Instance;
-        
-        if (matchCount > 3)
-        {
-            UpdateColorfulSprite(imageRepo,matchCount);
-        }else
-        {
-            UpdateSprite(GetSpritesForType());
-        }
-    }
-    
-    private void UpdateColorfulSprite(ItemImageRepo itemRepo,int matchedCount) //junk code update this.
+        UpdateColorfulSprite(matchCount);
+    } 
+    private void UpdateColorfulSprite(int matchedCount) //junk code update this.
     {
         Sprite newSprite;
         if (matchedCount > 4 && matchedCount < 8) //A
-        {
+        { 
             switch (_matchType)
             {
                 case MatchType.Green:
-                    newSprite = itemRepo.GreenCubeA;
+                    newSprite = _itemImageRepo.GreenCubeA;
                     break;
                 case MatchType.Yellow:
-                    newSprite = itemRepo.YellowCubeA;
+                    newSprite = _itemImageRepo.YellowCubeA;
                     break;
                 case MatchType.Blue:
-                    newSprite = itemRepo.BlueCubeA;
+                    newSprite = _itemImageRepo.BlueCubeA;
                     break;
                 case MatchType.Red:
-                    newSprite = itemRepo.RedCubeA;
+                    newSprite = _itemImageRepo.RedCubeA;
                     break;
                 case MatchType.Purple:
-                    newSprite = itemRepo.PurpleCubeA;
+                    newSprite = _itemImageRepo.PurpleCubeA;
                     break;
                 case MatchType.Pink:
-                    newSprite = itemRepo.PinkCubeA;
+                    newSprite = _itemImageRepo.PinkCubeA;
                     break;
                 default:
                     return;
@@ -83,22 +73,22 @@ public class NormalCubeItem : Item
             switch (_matchType)
             {
                 case MatchType.Green:
-                    newSprite = itemRepo.GreenCubeB;
+                    newSprite = _itemImageRepo.GreenCubeB;
                     break;
                 case MatchType.Yellow:
-                    newSprite = itemRepo.YellowCubeB;
+                    newSprite = _itemImageRepo.YellowCubeB;
                     break;
                 case MatchType.Blue:
-                    newSprite = itemRepo.BlueCubeB;
+                    newSprite = _itemImageRepo.BlueCubeB;
                     break;
                 case MatchType.Red:
-                    newSprite = itemRepo.RedCubeB;
+                    newSprite = _itemImageRepo.RedCubeB;
                     break;
                 case MatchType.Purple:
-                    newSprite = itemRepo.PurpleCubeB;
+                    newSprite = _itemImageRepo.PurpleCubeB;
                     break;
                 case MatchType.Pink:
-                    newSprite = itemRepo.PinkCubeB;
+                    newSprite = _itemImageRepo.PinkCubeB;
                     break;
                 default:
                     return;
@@ -109,22 +99,22 @@ public class NormalCubeItem : Item
             switch (_matchType)
             {
                 case MatchType.Green:
-                    newSprite = itemRepo.GreenCubeC;
+                    newSprite = _itemImageRepo.GreenCubeC;
                     break;
                 case MatchType.Yellow:
-                    newSprite = itemRepo.YellowCubeC;
+                    newSprite = _itemImageRepo.YellowCubeC;
                     break;
                 case MatchType.Blue:
-                    newSprite = itemRepo.BlueCubeC;
+                    newSprite = _itemImageRepo.BlueCubeC;
                     break;
                 case MatchType.Red:
-                    newSprite = itemRepo.RedCubeC;
+                    newSprite = _itemImageRepo.RedCubeC;
                     break;
                 case MatchType.Purple:
-                    newSprite = itemRepo.PurpleCubeC;
+                    newSprite = _itemImageRepo.PurpleCubeC;
                     break;
                 case MatchType.Pink:
-                    newSprite = itemRepo.PinkCubeC;
+                    newSprite = _itemImageRepo.PinkCubeC;
                     break;
                 default:
                     return;
@@ -136,34 +126,33 @@ public class NormalCubeItem : Item
             switch (_matchType)
             {
                 case MatchType.Green:
-                    newSprite = itemRepo.GreenCubeDefault;
+                    newSprite = _itemImageRepo.GreenCubeDefault;
                     break;
                 case MatchType.Yellow:
-                    newSprite = itemRepo.YellowCubeDefault;
+                    newSprite = _itemImageRepo.YellowCubeDefault;
                     break;
                 case MatchType.Blue:
-                    newSprite = itemRepo.BlueCubeDefault;
+                    newSprite = _itemImageRepo.BlueCubeDefault;
                     break;
                 case MatchType.Red:
-                    newSprite = itemRepo.RedCubeDefault;
+                    newSprite = _itemImageRepo.RedCubeDefault;
                     break;
                 case MatchType.Purple:
-                    newSprite = itemRepo.PurpleCubeDefault;
+                    newSprite = _itemImageRepo.PurpleCubeDefault;
                     break;
                 case MatchType.Pink:
-                    newSprite = itemRepo.PinkCubeDefault;
+                    newSprite = _itemImageRepo.PinkCubeDefault;
                     break;
                 default:
                     return;
             }
             UpdateSprite(newSprite);
         }
-    }
-
+    } 
     public override void Execute()
     {
         ParticlesController.Instance.PlayParticleSystem(this);
         AudioController.Instance.PlaySoundEffect(SoundEffects.Cube);
         base.Execute();
-    }
+    } 
 }

@@ -12,24 +12,24 @@ public class DropFillController : Singleton<DropFillController>
     private Cell[] fillingCells;
     private ItemFactory _itemFactory;
 
-    /*[Inject]
+    [Inject]
     void Construct(ItemFactory itemFactory)
     {
         _itemFactory = itemFactory;
-    }*/
+    } 
     private void Update()
     {
         if (!isActive) return;
         
         DoFalls();
         DoFills();
-    }
+    } 
     public void Initialize(GameGrid gameGrid, LevelData levelData)
     {
         _gameGrid = gameGrid;
         FindFillingCells();
         StartFall();
-    }
+    } 
     private void DoFills()
     {
         for (int i = 0; i < fillingCells.Length; i++)
@@ -38,7 +38,7 @@ public class DropFillController : Singleton<DropFillController>
 
             if (cell.item == null)
             {
-                cell.item = ItemFactory.Instance.CreateItem(LevelData.GetRandomCubeItemType(), _gameGrid.itemsParent); //itemFactory
+                cell.item = _itemFactory.CreateItem(LevelData.GetRandomCubeItemType(), _gameGrid.itemsParent); //itemFactory
 
                 float posY = 0;
                 var targetCell = cell.GetFallTarget().firstCellBelow;
@@ -83,7 +83,7 @@ public class DropFillController : Singleton<DropFillController>
             }
         }
         fillingCells = listOfCells.ToArray();
-    }
+    } 
     public void DoFalls()
     {
         

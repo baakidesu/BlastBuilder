@@ -3,39 +3,42 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
 public class LevelController : MonoBehaviour
 {
+    [HideInInspector] public LevelScriptableObject levelDataFromScriptableObject;
+    
     #region Privates
 
     private DropFillController _dropFillController;
-    private LevelScriptableObject levelDataFromScriptableObject;
     
-    [SerializeField] private GameGrid gameGrid;
     [SerializeField] private GameObject shuffleSprite;
     
     private LevelData levelData;
     private ItemFactory _itemFactory;
+    private AudioController _audioController;
+    [SerializeField] private GameGrid _gameGrid;
 
     #endregion
 
     #region Injections
 
     [Inject]
-    void Construct(ItemFactory itemFactory, DropFillController dropFillController)
+    void Construct(ItemFactory itemFactory, DropFillController dropFillController, AudioController audioController)
     {
         _itemFactory = itemFactory;
-        //, GameGrid _gameGrid
-        //gameGrid = _gameGrid;
         _dropFillController = dropFillController;
+        _audioController = audioController;
+        //_gameGrid = gameGrid;
     }
     
     #endregion
     private void Start()
     {
-        LimitFps();// I limit the fps for battery life.
+        //LimitFps();// I limit the fps for battery life.
         PrepareLevel();
         InitializeDropFilController();
     }
@@ -55,22 +58,21 @@ public class LevelController : MonoBehaviour
             gridWidth = levelDataFromScriptableObject.gridWidth,
             gridHeight = levelDataFromScriptableObject.gridHeight,
             moveCount = levelDataFromScriptableObject.moveCount,
-            grid = levelDataFromScriptableObject.grid
         };
         return levelInfo;
     } 
     public void PrepareLevel()
     {
-        levelData = new LevelData(gameGrid.levelInfo);
+        levelData = new LevelData(_gameGrid.levelInfo);
 
-        for (int i = 0; i < gameGrid.levelInfo.gridHeight; ++i)
+        for (int i = 0; i < _gameGrid.levelInfo.gridHeight; ++i)
         {
-            for (int j = 0; j < gameGrid.levelInfo.gridWidth; ++j)
+            for (int j = 0; j < _gameGrid.levelInfo.gridWidth; ++j)
             {
-                var cell = gameGrid.Cells[j,i];
+                var cell = _gameGrid.Cells[j,i];
 
-                var itemType = levelData.GridData[gameGrid.levelInfo.gridHeight - i-1, j];
-                var item = ItemFactory.Instance.CreateItem(itemType, gameGrid.itemsParent);
+                var itemType = levelData.GridData[_gameGrid.levelInfo.gridHeight - i-1, j];
+                var item = _itemFactory.CreateItem(itemType, _gameGrid.itemsParent);
                 if (item == null) continue;
                 
                 cell.item = item;
@@ -80,11 +82,11 @@ public class LevelController : MonoBehaviour
     } 
     private void InitializeDropFilController()
     {
-        _dropFillController.Initialize(gameGrid, levelData);
+        _dropFillController.Initialize(_gameGrid, levelData);
     }
     public void ResetGrid()
     {
-        AudioController.Instance.PlaySoundEffect(SoundEffects.Shuffle);
+        _audioController.PlaySoundEffect(SoundEffects.Shuffle);
         shuffleSprite.transform.DORotate(new Vector3(0, 0, 360), 1, RotateMode.FastBeyond360)
             .SetLoops(-1, LoopType.Yoyo);
         
@@ -98,11 +100,11 @@ public class LevelController : MonoBehaviour
     }
     private void ClearAllItems()
     {
-        for (int i = 0; i < gameGrid.levelInfo.gridHeight; ++i)
+        for (int i = 0; i < _gameGrid.levelInfo.gridHeight; ++i)
         {
-            for (int j = 0; j < gameGrid.levelInfo.gridWidth; ++j)
+            for (int j = 0; j < _gameGrid.levelInfo.gridWidth; ++j)
             {
-                var cell = gameGrid.Cells[j, i];
+                var cell = _gameGrid.Cells[j, i];
                 
                 if (cell.item != null)
                 {
@@ -114,14 +116,14 @@ public class LevelController : MonoBehaviour
     } 
     private void GenerateNewItems()
     {
-        for (int i = 0; i < gameGrid.levelInfo.gridHeight; ++i)
+        for (int i = 0; i < _gameGrid.levelInfo.gridHeight; ++i)
         {
-            for (int j = 0; j < gameGrid.levelInfo.gridWidth; ++j)
+            for (int j = 0; j < _gameGrid.levelInfo.gridWidth; ++j)
             {
-                var cell = gameGrid.Cells[j, i];
+                var cell = _gameGrid.Cells[j, i];
                 
                 var itemType = LevelData.GetRandomCubeItemType(); 
-                var item = ItemFactory.Instance.CreateItem(itemType, gameGrid.itemsParent);
+                var item = _itemFactory.CreateItem(itemType, _gameGrid.itemsParent);
             
                 if (item == null) continue;
 

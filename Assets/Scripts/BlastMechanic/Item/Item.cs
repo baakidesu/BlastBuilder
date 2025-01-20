@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
-
 public class Item : MonoBehaviour
 {
     #region Publics
@@ -16,7 +13,8 @@ public class Item : MonoBehaviour
     public int health = 1;
     
     public SpriteRenderer spriteRenderer;
-
+    
+    public FallAnimation fallAnimation;
 
     #endregion
     
@@ -26,22 +24,10 @@ public class Item : MonoBehaviour
     
     private const int BaseSortingOrder = 10;
     private static int _childSpriteOrder;
-
-    public FallAnimation fallAnimation;
-
-    #endregion
-
-    #region Injections
-
-    /*[Inject]
-    void Construct(FallAnimation _fallAnimation)
-    {
-        fallAnimation = _fallAnimation;
-    }*/
-
+    
     #endregion
     public Cell Cell // For reaching the item's cell.
-    {
+    { 
         get { return cell; }
         set
         {
@@ -72,7 +58,7 @@ public class Item : MonoBehaviour
         health = itemBase.health;
         
         fallAnimation.item = this;
-    }
+    } 
     private SpriteRenderer CreateSprite(Sprite sprite)
     { 
         var _spriteRenderer = new GameObject("Sprite: " + _childSpriteOrder).AddComponent<SpriteRenderer>();

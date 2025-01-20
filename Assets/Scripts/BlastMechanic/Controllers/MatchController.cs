@@ -9,18 +9,22 @@ public class MatchController : Singleton<MatchController>
 {
     [SerializeField] private GameGrid _gameGrid;
     [SerializeField] private GameObject _gameGridObject;
-    [SerializeField] private LevelController _levelController;
+    private LevelController _levelController;
+    private MatchController _matchController;
+    private GameController _gameController;
     
     private bool[,] _visitedCells;
     private int _minimumNumberOfSameColors = 2;
 
     private float timer = 0f;
     
-    /*Inject]
-    void Construct(GameGrid gameGrid)
+    [Inject]
+    void Construct(LevelController levelController, GameController gameController)
     {
-        _gameGrid = gameGrid;
-    }*/
+        //_gameGrid = gameGrid;
+        _levelController = levelController;
+        _gameController = gameController;
+    }
     void Start()
     {
         _visitedCells = new bool[_gameGrid.colums, _gameGrid.rows];
@@ -47,8 +51,8 @@ public class MatchController : Singleton<MatchController>
 
                 if (cell == null || cell.item == null) continue;
 
-                var validCells = MatchController.Instance.FindMatches(cell, cell.item.GetMatchType());
-                var validNormalItemCount = MatchController.Instance.CountMatchedNormalItems(validCells);
+                var validCells = FindMatches(cell, cell.item.GetMatchType());
+                var validNormalItemCount = CountMatchedNormalItems(validCells);
 
                 if (validNormalItemCount >= _minimumNumberOfSameColors)
                 {
@@ -132,7 +136,7 @@ public class MatchController : Singleton<MatchController>
             item.Execute();
         }
         
-       _ = GameController.Instance.DecreaseMovesAsync();
+       _ = _gameController.DecreaseMovesAsync();
     } 
     private void ExplodeValidCellsInNeighbours(Cell cell, List<Cell> previousCells)
     {

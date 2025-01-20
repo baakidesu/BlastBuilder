@@ -6,5 +6,4 @@ public class LevelInfo
     public int gridWidth;
     public int gridHeight;
     public int moveCount;
-    public string[] grid;
 }

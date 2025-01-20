@@ -24,8 +24,10 @@ public class MapController : MonoBehaviour
      [SerializeField] private GameObject playButton;
 
      [SerializeField] private AudioClip buttonClickSound;
+     [Space(10)]
      
-     //[Header("Buildings")]
+     [Header("Buildings")]
+     [SerializeField] private List<GameObject> buildings;
      #endregion
      
 
@@ -34,10 +36,12 @@ public class MapController : MonoBehaviour
      private int storyIndex = 0;
      private Image panelSpriteRenderer;
      private AudioSource _audioSource;
+     private string levelName;
      
      #endregion
      void Awake()
      {
+          PlayerPrefs.SetInt("Level", 1);
            _audioSource = GetComponent<AudioSource>();
            _audioSource.clip = buttonClickSound;
           if (PlayerPrefs.GetFloat("playerReadStory") != 1)
@@ -49,6 +53,20 @@ public class MapController : MonoBehaviour
           {
                Destroy(storyPanel);
                Destroy(storyButton);
+               playButton.SetActive(true);
+          }
+
+          for (int i = 1; i < buildings.Count+1; i++)
+          {
+               levelName = "Level" + i;
+               Debug.Log(i);
+               if (Resources.Load<LevelScriptableObject>("Levels/" + levelName).didWin)
+               {
+                   //buildings[i].; sprite değiştir.
+               }else
+               {
+                 PlayerPrefs.SetInt("Level", i);   
+               }
           }
      }
 
@@ -56,21 +74,6 @@ public class MapController : MonoBehaviour
      {
           Debug.Log(PlayerPrefs.GetInt("Level"));
      }
-
-     public void OnStoryClick()
-     {
-          storyIndex++;
-          if (stories.Count > storyIndex)
-          {
-               panelSpriteRenderer.sprite = stories[storyIndex];
-          }else
-          {
-               PlayerPrefs.SetFloat("playerReadStory", 1);
-               Destroy(storyPanel);
-               Destroy(storyButton);
-          }
-     }
-
      #region PlayGame Panel Functions
 
      public void OnPlayGameClick()
@@ -93,15 +96,27 @@ public class MapController : MonoBehaviour
      }
 
      #endregion
-
      private void ButtonClickSoundPlay()
      {
           _audioSource.Play();
-     }
-
-     public void OnPlayButton()
+     } 
+     public void OnClickPanelOpener()
      {
           OnBuildingClick(PlayerPrefs.GetInt("Level")+1);
           playButton.SetActive(false);
+     }
+     public void OnStoryClick()
+     {
+          storyIndex++;
+          if (stories.Count > storyIndex)
+          {
+               panelSpriteRenderer.sprite = stories[storyIndex];
+          }else
+          {
+               PlayerPrefs.SetFloat("playerReadStory", 1);
+               Destroy(storyPanel);
+               Destroy(storyButton);
+               playButton.SetActive(true);
+          }
      }
 }

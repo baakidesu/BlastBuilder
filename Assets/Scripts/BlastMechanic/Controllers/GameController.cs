@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
 
 public class GameController : Singleton<GameController>
 {
     [Header("References")]
     [SerializeField] private GameGrid _gameGrid;
+    private LevelController _levelController;
     [Space(10)]
     
     [Header("UI Elements")]
@@ -19,12 +21,17 @@ public class GameController : Singleton<GameController>
     private int moves;
     
     public Action OnMovesFinished;
+    public int points;
 
-    /*[Inject]
-    void Construct(GameGrid gameGrid)
+    private AudioController _audioController;
+
+    [Inject]
+    void Construct(AudioController audioController, LevelController levelController)
     {
-        _gameGrid = gameGrid;
-    }*/
+        //_gameGrid = gameGrid;
+        _audioController = audioController;
+        _levelController = levelController;
+    }
 
     private void Start()
     {
@@ -42,8 +49,8 @@ public class GameController : Singleton<GameController>
             moveText.text = moves.ToString();
             await Task.Delay(TimeSpan.FromSeconds(1));
             OnMovesFinished?.Invoke();
-            AudioController.Instance.StopBackgroundMusic();
-            AudioController.Instance.PlaySoundEffect(SoundEffects.LevelEnd);
+            _audioController.StopBackgroundMusic();
+            _audioController.PlaySoundEffect(SoundEffects.LevelEnd);
             UIPanel.SetActive(false);
             gameOverPanel.SetActive(true);
         }
@@ -54,6 +61,10 @@ public class GameController : Singleton<GameController>
     public void ReturnMap()
     {
         PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level")+1);
+        if (true) //kazandıysa
+        {
+            _levelController.levelDataFromScriptableObject.didWin = true;
+        }
         SceneManager.LoadScene("Main");
     }
 }

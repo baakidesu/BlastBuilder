@@ -13,7 +13,7 @@ public class InputController : MonoBehaviour
     void Construct(MapController mapController)
     {
         _mapController = mapController;
-    }
+    } 
         private void Update()
         {
         #if UNITY_EDITOR
@@ -21,15 +21,14 @@ public class InputController : MonoBehaviour
         #else
             GetTouchMobile();
         #endif
-        }
+        } 
         private void GetTouchEditor()
         {
             if (Input.GetMouseButtonUp(0))
             {
                 ExecuteTouch(Input.mousePosition);
             }
-        }
-
+        } 
         private void GetTouchMobile()
         {
             var touch = Input.GetTouch(0);
@@ -41,8 +40,7 @@ public class InputController : MonoBehaviour
                     ExecuteTouch(touch.position);
                     break;
             }
-        }
-
+        } 
         private void ExecuteTouch(Vector3 pos)
         {
             var hit = Physics2D.OverlapPoint(camera.ScreenToWorldPoint(pos)) as BoxCollider2D;
@@ -50,7 +48,7 @@ public class InputController : MonoBehaviour
             {
                 hit.GetComponent<Cell>().CellTapped();
             }
-        }
+        } 
         private void DisableTouch()
         {
             this.enabled = false;

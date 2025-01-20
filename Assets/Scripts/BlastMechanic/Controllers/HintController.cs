@@ -6,13 +6,15 @@ using VContainer;
 
 public class HintController : MonoBehaviour
 {
-    [SerializeField]private GameGrid _gameGrid;
+    [SerializeField] private GameGrid _gameGrid;
+    private MatchController _matchController;
 
-    /*[Inject]
-    void Construct(GameGrid gameGrid)
+    [Inject]
+    void Construct(MatchController matchController)
     {
-        _gameGrid = gameGrid;
-    }*/ 
+        //_gameGrid = gameGrid;
+        _matchController = matchController;
+    } 
     private void Update()
     {
         Hint();
@@ -29,8 +31,8 @@ public class HintController : MonoBehaviour
 
                 if (cell.item == null || visitedCells.Contains(cell)) continue;
 
-                var validCells = MatchController.Instance.FindMatches(cell, cell.item.GetMatchType());
-                var validNormalItemCount = MatchController.Instance.CountMatchedNormalItems(validCells);
+                var validCells = _matchController.FindMatches(cell, cell.item.GetMatchType());
+                var validNormalItemCount = _matchController.CountMatchedNormalItems(validCells);
                 
                 visitedCells.AddRange(validCells);
 
