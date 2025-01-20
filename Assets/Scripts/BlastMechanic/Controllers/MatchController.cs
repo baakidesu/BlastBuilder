@@ -7,6 +7,8 @@ using DG.Tweening;
 
 public class MatchController : Singleton<MatchController>
 {
+    #region Privates
+
     private GameGrid _gameGrid;
     [SerializeField] private GameObject _gameGridObject;
     private LevelController _levelController;
@@ -15,16 +17,21 @@ public class MatchController : Singleton<MatchController>
     
     private bool[,] _visitedCells;
     private int _minimumNumberOfSameColors = 2;
-
     private float timer = 0f;
+
+    #endregion
     
+    #region Injections
+
     [Inject]
     void Construct(LevelController levelController, GameController gameController, GameGrid gameGrid)
     {
         _gameGrid = gameGrid;
         _levelController = levelController;
         _gameController = gameController;
-    } 
+    }
+
+    #endregion
     void Start()
     {
         _visitedCells = new bool[_gameGrid.colums, _gameGrid.rows];
@@ -135,8 +142,8 @@ public class MatchController : Singleton<MatchController>
             var item = explodedCell.item;
             item.Execute();
         }
-        Debug.Log(validNormalItemCount);
-        if (validNormalItemCount is > 4 and < 8) //A State //*2
+        
+        if (validNormalItemCount is > 4 and < 8) //A State 
         {
             _gameController.points += validNormalItemCount * 2;
         }else if (validNormalItemCount is > 7 and < 10) //B State

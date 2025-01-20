@@ -44,8 +44,8 @@ public class LevelController : MonoBehaviour
     }
     private void LimitFps()
     {
-        int refreshRate = Screen.currentResolution.refreshRate;
-        Application.targetFrameRate = (refreshRate >= 90) ? 90 : 60; 
+        RefreshRate refreshRate = Screen.currentResolution.refreshRateRatio;
+        Application.targetFrameRate = (refreshRate.denominator >= 90) ? 90 : 60; 
     }
     public LevelInfo GetLevelInfo(int levelIndex)
     {

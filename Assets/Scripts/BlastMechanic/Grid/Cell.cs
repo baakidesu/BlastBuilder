@@ -127,7 +127,6 @@ public class Cell : MonoBehaviour
         {
             return;
         }
-        //TODO
         MatchController.Instance.ExplodeMatchingCells(this);
     }
     private void UpdateName()
