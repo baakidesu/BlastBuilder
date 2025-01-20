@@ -55,6 +55,12 @@ TagManager:
   - name: UI
     uniqueID: 1260654477
     locked: 0
+  - name: Tilemap
+    uniqueID: 221667115
+    locked: 0
+  - name: MapProps
+    uniqueID: 1766663121
+    locked: 0
   - name: Background
     uniqueID: 1962408037
     locked: 0

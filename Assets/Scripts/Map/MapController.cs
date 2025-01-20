@@ -29,8 +29,7 @@ public class MapController : MonoBehaviour
      [Header("Buildings")]
      [SerializeField] private List<GameObject> buildings;
      #endregion
-     
-
+    
      #region Privates
      
      private int storyIndex = 0;
@@ -59,20 +58,16 @@ public class MapController : MonoBehaviour
           for (int i = 1; i < buildings.Count+1; i++)
           {
                levelName = "Level" + i;
-               Debug.Log(i);
                if (Resources.Load<LevelScriptableObject>("Levels/" + levelName).didWin)
                {
                    //buildings[i].; sprite değiştir.
                }else
                {
-                 PlayerPrefs.SetInt("Level", i);   
+                    Debug.Log("Kazanmadı: " + levelName);
+                    PlayerPrefs.SetInt("Level", i);
+                    break;
                }
           }
-     }
-
-     private void Start()
-     {
-          Debug.Log(PlayerPrefs.GetInt("Level"));
      }
      #region PlayGame Panel Functions
 
@@ -87,14 +82,7 @@ public class MapController : MonoBehaviour
           playGamePanel.SetActive(false);
           playButton.SetActive(true);
      }
-
-     public void OnBuildingClick(int buildingIndex)
-     {
-          ButtonClickSoundPlay();
-          PlayerPrefs.SetInt("Level", buildingIndex);
-          playGamePanel.SetActive(true);
-     }
-
+     
      #endregion
      private void ButtonClickSoundPlay()
      {
@@ -102,7 +90,7 @@ public class MapController : MonoBehaviour
      } 
      public void OnClickPanelOpener()
      {
-          OnBuildingClick(PlayerPrefs.GetInt("Level")+1);
+          playGamePanel.SetActive(true);
           playButton.SetActive(false);
      }
      public void OnStoryClick()
