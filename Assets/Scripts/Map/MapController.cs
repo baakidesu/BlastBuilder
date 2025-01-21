@@ -44,16 +44,17 @@ public class MapController : MonoBehaviour
      {
            _audioSource = GetComponent<AudioSource>();
            _audioSource.clip = buttonClickSound;
-          if (PlayerPrefs.GetFloat("playerReadStory") != 1)
+          if (PlayerPrefs.GetFloat("playerReadStory") != 1) //Play Story
           {
+               playButton.SetActive(false);
+               storyPanel.SetActive(true);
                panelSpriteRenderer = storyPanel.GetComponent<Image>();
                panelSpriteRenderer.sprite = stories[storyIndex];
                PlayerPrefs.SetInt("Level",1);
-          }else
+          }else //Don't play story
           {
                Destroy(storyPanel);
                Destroy(storyButton);
-               playButton.SetActive(true);
           }
 
           for (int i = 1; i < PlayerPrefs.GetInt("Level")+1; i++)

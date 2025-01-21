@@ -7,12 +7,18 @@ using VContainer;
 
 public class GameController : Singleton<GameController>
 {
-    #region Publics
+    #region Privates
 
+    private AudioController _audioController;
+    private int moves;
+    private GameGrid _gameGrid;
+    private LevelController _levelController;
+    
     [Header("UI Elements")]
     [SerializeField] private GameObject UIPanel;
     [SerializeField] private TMP_Text moveText;
     [SerializeField] private TMP_Text pointsText;
+    [SerializeField] private TMP_Text pointsToGatherText;
     [Space(10)]
 
     [Header("Win Panel")]
@@ -24,15 +30,6 @@ public class GameController : Singleton<GameController>
     
     public Action OnMovesFinished;
     [HideInInspector] public int points = 0;
-
-    #endregion
-
-    #region Privates
-
-    private AudioController _audioController;
-    private int moves;
-    private GameGrid _gameGrid;
-    private LevelController _levelController;
 
     #endregion
 
@@ -51,6 +48,7 @@ public class GameController : Singleton<GameController>
     {
         moves = _gameGrid._moveCount;
         moveText.text = moves.ToString();
+        pointsToGatherText.text = _levelController.levelDataFromScriptableObject.pointToGather.ToString();
         Debug.Log("Level: " + PlayerPrefs.GetInt("Level"));
     } 
     public async Task DecreaseMovesAsync()
