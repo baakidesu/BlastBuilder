@@ -51,6 +51,7 @@ public class GameController : Singleton<GameController>
     {
         moves = _gameGrid._moveCount;
         moveText.text = moves.ToString();
+        Debug.Log("Level: " + PlayerPrefs.GetInt("Level"));
     } 
     public async Task DecreaseMovesAsync()
     {
@@ -73,6 +74,7 @@ public class GameController : Singleton<GameController>
                 winPanel.SetActive(true);
                 _levelController.levelDataFromScriptableObject.didWin = true;
                 PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level")+1);
+                Debug.Log("Level ending: "+ PlayerPrefs.GetInt("Level"));
             }else
             {
                 gameOverPanel.SetActive(true);

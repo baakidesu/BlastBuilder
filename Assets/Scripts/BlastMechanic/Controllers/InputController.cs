@@ -7,14 +7,6 @@ using VContainer;
 public class InputController : MonoBehaviour
 {
     [SerializeField] private new Camera camera;
-    
-    private GameGrid _gameGrid;
-
-    [Inject]
-    void Construct(GameGrid gameGrid)
-    {
-        _gameGrid = gameGrid;
-    } 
         private void Update()
         {
         #if UNITY_EDITOR

@@ -16,4 +16,5 @@ MonoBehaviour:
   gridWidth: 10
   gridHeight: 10
   moveCount: 20
-  grid: []
+  pointToGather: 0
+  didWin: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   levelNumber: 1
-  gridWidth: 10
-  gridHeight: 10
-  moveCount: 20
+  gridWidth: 5
+  gridHeight: 5
+  moveCount: 5
   pointToGather: 0
   didWin: 0

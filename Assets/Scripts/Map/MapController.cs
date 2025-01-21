@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+
 public class MapController : MonoBehaviour
 {
-     #region Publics
+     #region Privates
      
      [Header("Story Panel Elements")]
      [SerializeField] private GameObject storyPanel;
@@ -24,13 +27,12 @@ public class MapController : MonoBehaviour
      [SerializeField] private GameObject playButton;
 
      [SerializeField] private AudioClip buttonClickSound;
+     [FormerlySerializedAs("buildings")]
      [Space(10)]
      
      [Header("Buildings")]
-     [SerializeField] private List<GameObject> buildings;
-     #endregion
-    
-     #region Privates
+     [SerializeField] private List<GameObject> ruinedBuildings;
+     [SerializeField] private List<GameObject> restoredBuildings;
      
      private int storyIndex = 0;
      private Image panelSpriteRenderer;
@@ -40,7 +42,6 @@ public class MapController : MonoBehaviour
      #endregion
      void Awake()
      {
-          PlayerPrefs.SetInt("Level", 1);
            _audioSource = GetComponent<AudioSource>();
            _audioSource.clip = buttonClickSound;
           if (PlayerPrefs.GetFloat("playerReadStory") != 1)
@@ -55,17 +56,15 @@ public class MapController : MonoBehaviour
                playButton.SetActive(true);
           }
 
-          for (int i = 1; i < buildings.Count+1; i++)
+          for (int i = 1; i < PlayerPrefs.GetInt("Level")+1; i++)
           {
-               levelName = "Level" + i;
-               if (Resources.Load<LevelScriptableObject>("Levels/" + levelName).didWin)
+               Debug.Log("for " +PlayerPrefs.GetInt("Level"));
+               if (i !=  PlayerPrefs.GetInt("Level")) 
                {
-                   //buildings[i].; sprite değiştir.
-               }else
-               {
-                    Debug.Log("Kazanmadı: " + levelName);
-                    PlayerPrefs.SetInt("Level", i);
-                    break;
+                    Debug.Log("i: " +i);
+                    var restoredBuilding = Instantiate(restoredBuildings[0]);
+                    restoredBuilding.transform.position = ruinedBuildings[i-1].transform.position;
+                    ruinedBuildings[i-1].SetActive(false);
                }
           }
      }
