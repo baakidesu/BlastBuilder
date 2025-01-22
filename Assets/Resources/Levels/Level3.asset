@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   levelNumber: 3
-  gridWidth: 14
-  gridHeight: 9
+  colorCount: 2
+  gridWidth: 10
+  gridHeight: 10
   moveCount: 20
-  grid: []
+  pointToGather: 90
+  didWin: 0

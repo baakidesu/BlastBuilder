@@ -6,29 +6,46 @@ using Random = System.Random;
 
 public class LevelData
 {
-   public ItemType[,] GridData { get; protected set; }
-   
-   private static readonly Random _random = new Random(); 
-   public static int GetRandomNumber(int min, int max) //Faster than unity's random.
-   {
-      lock (_random) //sync
-      {
-         return _random.Next(min, max);
-      }
-   } 
-   public LevelData(LevelInfo levelInfo)
-   {
-      GridData = new ItemType[levelInfo.gridHeight,levelInfo.gridWidth];
+    public ItemType[,] GridData { get; protected set; }
 
-      for (int i = levelInfo.gridHeight-1; i>=0; --i)
-         for (int j = 0; j < levelInfo.gridWidth; ++j)
-         {
-            GridData[i, j] = ((ItemType[])Enum.GetValues(typeof(ItemType)))[GetRandomNumber(1,7)];
-         }
-      
-   }
-   public static ItemType GetRandomCubeItemType()
-   {
-      return ((ItemType[]) Enum.GetValues(typeof(ItemType)))[GetRandomNumber(1,7)];
-   }
+    private static readonly Random _random = new Random();
+    private static int _colorIndex; // Bu değişken, colorIndex değerini global olarak saklar.
+
+    public static int GetRandomNumber(int min, int max) // Faster than Unity's random.
+    {
+        lock (_random) // Sync
+        {
+            return _random.Next(min, max);
+        }
+    }
+
+    public LevelData(LevelInfo levelInfo)
+    {
+        GridData = new ItemType[levelInfo.gridHeight, levelInfo.gridWidth];
+
+        // colorIndex hesaplanıyor
+        if (levelInfo.colorCount <= 6 && levelInfo.colorCount >= 1)
+        {
+            _colorIndex = levelInfo.colorCount + 1;
+        }
+        else
+        {
+            _colorIndex = 7;
+        }
+
+        // GridData dolduruluyor
+        for (int i = levelInfo.gridHeight - 1; i >= 0; --i)
+        {
+            for (int j = 0; j < levelInfo.gridWidth; ++j)
+            {
+                GridData[i, j] = ((ItemType[])Enum.GetValues(typeof(ItemType)))[GetRandomNumber(1, _colorIndex)];
+            }
+        }
+    }
+
+    public static ItemType GetRandomCubeItemType()
+    {
+        // Artık colorIndex global değişkenden alınıyor
+        return ((ItemType[])Enum.GetValues(typeof(ItemType)))[GetRandomNumber(1, _colorIndex)];
+    }
 }

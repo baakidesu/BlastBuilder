@@ -58,6 +58,7 @@ public class LevelController : MonoBehaviour
             gridWidth = levelDataFromScriptableObject.gridWidth,
             gridHeight = levelDataFromScriptableObject.gridHeight,
             moveCount = levelDataFromScriptableObject.moveCount,
+            colorCount = levelDataFromScriptableObject.colorCount,
         };
         return levelInfo;
     } 

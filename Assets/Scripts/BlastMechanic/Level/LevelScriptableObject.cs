@@ -4,6 +4,7 @@ using UnityEngine;
 public class LevelScriptableObject : ScriptableObject
 {
     public int levelNumber;
+    public int colorCount;
     public int gridWidth;
     public int gridHeight;
     public int moveCount;
