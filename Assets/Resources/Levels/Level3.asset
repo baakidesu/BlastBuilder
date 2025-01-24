@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   levelNumber: 3
-  colorCount: 2
+  colorCount: 6
   gridWidth: 10
   gridHeight: 10
   moveCount: 20
