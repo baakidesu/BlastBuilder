@@ -16,6 +16,6 @@ MonoBehaviour:
   colorCount: 6
   gridWidth: 10
   gridHeight: 10
-  moveCount: 20
-  pointToGather: 90
+  moveCount: 21
+  pointToGather: 110
   didWin: 0

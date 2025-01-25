@@ -5,7 +5,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public class DropFillController : Singleton<DropFillController>
+public class DropFillController : MonoBehaviour
 {
     private bool isActive;
     private GameGrid _gameGrid;

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
 
-public class GameController : Singleton<GameController>
+public class GameController : MonoBehaviour
 {
     #region Privates
 
@@ -72,7 +72,6 @@ public class GameController : Singleton<GameController>
                 winPanel.SetActive(true);
                 _levelController.levelDataFromScriptableObject.didWin = true;
                 PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level")+1);
-                Debug.Log("Level ending: "+ PlayerPrefs.GetInt("Level"));
             }else
             {
                 gameOverPanel.SetActive(true);
