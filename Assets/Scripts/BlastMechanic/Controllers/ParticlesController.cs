@@ -11,7 +11,6 @@ public class ParticlesController : Singleton<ParticlesController>
     public ParticleSystem pinkParticleSystem;
     public ParticleSystem purpleParticleSystem;
     public ParticleSystem yellowParticleSystem;
-
     public void PlayParticleSystem(Item item)
     {
         ParticleSystem particeSystem = null;
@@ -39,10 +38,8 @@ public class ParticlesController : Singleton<ParticlesController>
             default:
                 return;
         }
-        
         Vector3 pos = new Vector3(item.transform.position.x, item.transform.position.y, 100);
         var particle = Instantiate(particeSystem, pos, Quaternion.identity, item.Cell.gameGrid.particlesParent);
-
         particle.Play();
     }
 }

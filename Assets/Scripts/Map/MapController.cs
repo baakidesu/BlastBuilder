@@ -73,8 +73,7 @@ public class MapController : MonoBehaviour
                 playButton.SetActive(false);
             }
         }
-    }
-
+    } 
     private void ButtonClickSoundPlay()
     {
         _audioSource.Play();
@@ -106,22 +105,19 @@ public class MapController : MonoBehaviour
     {
         ButtonClickSoundPlay();
         SceneManager.LoadScene("Blast");
-    }
-
+    } 
     public void OnReturnMapClick()
     {
         ButtonClickSoundPlay();
         playGamePanel.SetActive(false);
         playButton.SetActive(true);
-    }
-
+    } 
     public void RestartWholeGameButton()
     {
         PlayerPrefs.SetInt("Level", 1);
         PlayerPrefs.SetFloat("playerReadStory", 0);
         SceneManager.LoadScene("Main");
-    }
-
+    } 
     public void ExitGameButton()
     {
         Application.Quit();

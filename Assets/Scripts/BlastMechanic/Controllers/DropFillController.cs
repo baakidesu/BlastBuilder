@@ -6,7 +6,7 @@ using VContainer;
 using VContainer.Unity;
 
 public class DropFillController : MonoBehaviour
-{
+{   
     private bool isActive;
     private GameGrid _gameGrid;
     private Cell[] fillingCells;

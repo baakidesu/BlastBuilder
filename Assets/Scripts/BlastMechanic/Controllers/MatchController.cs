@@ -4,21 +4,20 @@ using VContainer;
 
 public class MatchController : Singleton<MatchController>
 {
-    private void Start()
-    {
-        _visitedCells = new bool[_gameGrid.colums, _gameGrid.rows];
-    }
+    #region Privates
 
-    private void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer >= 3f) //Limiting the timer because of battery optimisation
-        {
-            if (NoMoreMatches()) _levelController.ResetGrid();
-            timer = 0f;
-        }
-    }
+    private GameGrid _gameGrid;
+    [SerializeField] private GameObject _gameGridObject;
+    private LevelController _levelController;
+    private MatchController _matchController;
+    private GameController _gameController;
 
+    private bool[,] _visitedCells;
+    private readonly int _minimumNumberOfSameColors = 2;
+    private float timer;
+
+    #endregion
+    
     #region Injections
 
     [Inject]
@@ -30,7 +29,19 @@ public class MatchController : Singleton<MatchController>
     }
 
     #endregion
-
+    private void Start()
+    {
+        _visitedCells = new bool[_gameGrid.colums, _gameGrid.rows];
+    }
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= 3f) //Limiting the timer because of battery optimisation
+        {
+            if (NoMoreMatches()) _levelController.ResetGrid();
+            timer = 0f;
+        }
+    } 
     private bool NoMoreMatches()
     {
         for (var y = 0; y < _gameGrid.rows; y++)
@@ -48,7 +59,6 @@ public class MatchController : Singleton<MatchController>
 
         return true;
     }
-
     public List<Cell> FindMatches(Cell cell, MatchType matchType)
     {
         var matchedItems = new List<Cell>();
@@ -57,7 +67,6 @@ public class MatchController : Singleton<MatchController>
 
         return matchedItems;
     }
-
     private void ResetVisitedCells()
     {
         for (var x = 0; x < _visitedCells.GetLength(0); x++)
@@ -89,7 +98,6 @@ public class MatchController : Singleton<MatchController>
             for (var i = 0; i < neighbours.Count; i++) FindMatchesRecursively(neighbours[i], matchType, matchedItems);
         }
     }
-
     public int CountMatchedNormalItems(List<Cell> cells)
     {
         var _count = 0;
@@ -98,7 +106,6 @@ public class MatchController : Singleton<MatchController>
                 _count++;
         return _count;
     }
-
     public void ExplodeMatchingCells(Cell cell)
     {
         var previousCells = new List<Cell>();
@@ -131,8 +138,7 @@ public class MatchController : Singleton<MatchController>
             _gameController.points += 2;
         else if (validNormalItems == 4) _gameController.points += 5;
         _ = _gameController.DecreaseMovesAsync();
-    }
-
+    } 
     private void ExplodeValidCellsInNeighbours(Cell cell, List<Cell> previousCells)
     {
         var explodedCellsInNeighbours = cell.neighbours;
@@ -150,18 +156,4 @@ public class MatchController : Singleton<MatchController>
             }
         }
     }
-
-    #region Privates
-
-    private GameGrid _gameGrid;
-    [SerializeField] private GameObject _gameGridObject;
-    private LevelController _levelController;
-    private MatchController _matchController;
-    private GameController _gameController;
-
-    private bool[,] _visitedCells;
-    private readonly int _minimumNumberOfSameColors = 2;
-    private float timer;
-
-    #endregion
 }

@@ -7,6 +7,8 @@ using VContainer;
 
 public class GameController : MonoBehaviour
 {
+    public Action OnMovesFinished;
+
     #region Privates
 
     private AudioController _audioController;
@@ -28,7 +30,6 @@ public class GameController : MonoBehaviour
     [Header("Lose Panel")]
     [SerializeField] private GameObject gameOverPanel;
     
-    public Action OnMovesFinished;
     [HideInInspector] public int points = 0;
 
     #endregion
